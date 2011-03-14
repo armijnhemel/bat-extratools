@@ -14,3 +14,8 @@ A collection of extra tools for the Binary Analysis Tool, scraped from GPL sourc
 %setup -q
 %build
 make
+%install
+rm -rf $RPM_BUILD_ROOT
+install -D -p -m 755 squashfs-broadcom/unsquashfs $RPM_BUILD_ROOT%{_bindir}/bat-unsquashfs-broadcom
+%files
+%{_bindir}/bat-unsquashfs-broadcom
