@@ -18,7 +18,7 @@
 
 #include <string.h>
 #include "cramfs_common.h"
-#include "../include/bitops.h"
+#include "bitops.h"
 
 u32 u32_toggle_endianness(int big_endian, u32 what)
 {
