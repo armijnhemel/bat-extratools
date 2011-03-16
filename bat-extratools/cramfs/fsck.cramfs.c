@@ -640,6 +640,7 @@ static void do_special_inode(char *path, struct cramfs_inode *i)
 	if (opt_verbose) {
 		print_node(type, i, path);
 	}
+
 /*
 	if (opt_extract) {
 		if (mknod(path, i->mode, devtype) < 0) {
