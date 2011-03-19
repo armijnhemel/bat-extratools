@@ -34,7 +34,7 @@
  */
 
 /* compile-time options */
-//#define INCLUDE_FS_TESTS	/* include cramfs checking and extraction */
+#define INCLUDE_FS_TESTS	/* include cramfs checking and extraction */
 
 #include <stdio.h>
 #include <stdarg.h>
@@ -640,13 +640,14 @@ static void do_special_inode(char *path, struct cramfs_inode *i)
 	if (opt_verbose) {
 		print_node(type, i, path);
 	}
-
+/*
 	if (opt_extract) {
 		if (mknod(path, i->mode, devtype) < 0) {
 			die(FSCK_ERROR, 1, _("mknod failed: %s"), path);
 		}
 		change_file_status(path, i);
 	}
+*/
 }
 
 static void expand_fs(char *path, struct cramfs_inode *inode)
