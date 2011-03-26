@@ -8,7 +8,7 @@ CFLAGS := $(INCLUDEDIR) -I$(LZMADIR) -I$(LINUXDIR)/include -D_FILE_OFFSET_BITS=6
 LZMAOBJS = LzmaEnc.o LzFind.o LzmaDec.o
 MKOBJS = mksquashfs.o read_fs.o sort.o sqlzma.o
 
-all: mksquashfs unsquashfs
+all: unsquashfs
 
 $(LZMAOBJS): %.o: $(LZMADIR)/%.c
 	$(CC) -c $(CFLAGS) $(CPPFLAGS) $^ -o $@
