@@ -17,7 +17,9 @@ make
 %install
 rm -rf $RPM_BUILD_ROOT
 install -D -p -m 755 squashfs-broadcom/unsquashfs $RPM_BUILD_ROOT%{_bindir}/bat-unsquashfs-broadcom
+install -D -p -m 755 squashfs-openwrt/unsquashfs-lzma $RPM_BUILD_ROOT%{_bindir}/bat-unsquashfs-openwrt
 install -D -p -m 755 cramfs/disk-utils/fsck.cramfs $RPM_BUILD_ROOT%{_bindir}/bat-fsck.cramfs
 %files
 %{_bindir}/bat-unsquashfs-broadcom
+%{_bindir}/bat-unsquashfs-openwrt
 %{_bindir}/bat-fsck.cramfs
