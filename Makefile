@@ -1,4 +1,4 @@
-all:	squashfsbroadcom cramfsunpack
+all:	squashfsbroadcom squashfsopenwrtold cramfsunpack
 
 squashfsbroadcom:
 	cd squashfs-broadcom; make
