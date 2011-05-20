@@ -6,5 +6,6 @@ Included are:
 
 * cramfs - a version of cramfs that can unpack cramfs (the standard version of Fedora can't) and which does not require root privileges
 * squashfs-broadcom - a version of squashfs with LZMA compression that is used on devices that are based on certain Broadcom chipsets
+* squashfs-ralink - a version of squashfs with LZMA compression that is used on devices that are based on certain Ralink chipsets. This could be the standard version from slax.org (TODO: investigate this)
 * squashfs-openwrt - a different version of squashfs with LZMA compression that is used on devices that run OpenWrt derived distributions. Can sometimes also be used for different distributions.
 * unyaffs - from http://code.google.com/p/unyaffs/
