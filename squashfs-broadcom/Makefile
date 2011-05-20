@@ -16,7 +16,7 @@ $(LZMAOBJS): %.o: $(LZMADIR)/%.c
 mksquashfs: $(MKOBJS) $(LZMAOBJS)
 	$(CC) $(MKOBJS) $(LZMAOBJS) -lz -lpthread -lm -lstdc++ -o $@
 
-unsquashfs: unsquashfs.o $(LZMAOBJS)
+unsquashfs: unsquashfs.o $(LZMAOBJS) sqlzma.o
 	$(CC) unsquashfs.o  sqlzma.o $(LZMAOBJS) -lz -lpthread -lm -o $@
 
 clean:
