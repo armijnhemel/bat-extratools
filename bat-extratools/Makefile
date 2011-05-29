@@ -5,8 +5,12 @@ squashfsbroadcom:
 
 squashfsralink:
 	cd squashfs-ralink; make
+
 squashfsopenwrtold:
 	cd squashfs-openwrt; make
+
+squashfs42:
+	cd squashfs4.2/squashfs-tools; make
 
 cramfsunpack:
 	cd cramfs; ./configure; make
