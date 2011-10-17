@@ -7,9 +7,9 @@ ifdef UseDebugFlags
 DebugFlags = -g -Wall -Wno-unused-variable -O0 -UNDEBUG
 endif
 CFLAGS += -I${Sqlzma} -D_REENTRANT -DNDEBUG ${DebugFlags}
-LDLIBS += -lz -L${LzmaAlone} -L${LzmaC}
+LDLIBS += -lz -L${LzmaAlone} -L${LzmaC} -lunlzma
 #Tgt = mksquashfs unsquashfs
-Tgt = unsquashfs
+Tgt = bat-unsquashfs-ralink
 
 all: ${Tgt}
 
@@ -29,8 +29,10 @@ unsquashfs.o: CFLAGS += -U_REENTRANT
 unsquashfs.o: unsquashfs.c squashfs_fs.h read_fs.h global.h \
 	${Sqlzma}/sqlzma.h ${Sqlzma}/sqmagic.h ${LzmaC}/libunlzma.a
 
-unsquashfs: LDLIBS += -lunlzma
-unsquashfs: unsquashfs.o
+#unsquashfs: LDLIBS += -lunlzma
+#unsquashfs: unsquashfs.o
+bat-unsquashfs-ralink:	unsquashfs.o
+	$(CC) unsquashfs.o $(LDLIBS) -o $@
 
 clean:
 	${RM} *~ *.o ${Tgt}
