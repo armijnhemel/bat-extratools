@@ -14,6 +14,7 @@ squashfs42:
 
 cramfsunpack:
 	cd cramfs; ./configure --without-ncurses; make
+	mv cramfs/disk-utils/fsck.cramfs cramfs/disk-utils/bat-fsck.cramfs
 
 unyaffsunpack:
 	cd unyaffs; make
