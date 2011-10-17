@@ -13,7 +13,7 @@ squashfs42:
 	cd squashfs4.2/squashfs-tools; make
 
 cramfsunpack:
-	cd cramfs; ./configure; make
+	cd cramfs; ./configure --without-ncurses; make
 
 unyaffsunpack:
 	cd unyaffs; make
