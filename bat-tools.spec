@@ -18,12 +18,12 @@ A collection of extra tools for the Binary Analysis Tool, scraped from GPL sourc
 make
 %install
 rm -rf $RPM_BUILD_ROOT
-install -D -p -m 755 squashfs-broadcom/unsquashfs $RPM_BUILD_ROOT%{_bindir}/bat-unsquashfs-broadcom
-install -D -p -m 755 squashfs-openwrt/unsquashfs-lzma $RPM_BUILD_ROOT%{_bindir}/bat-unsquashfs-openwrt
-install -D -p -m 755 squashfs4.2/squashfs-tools/unsquashfs $RPM_BUILD_ROOT%{_bindir}/bat-unsquashfs42
-install -D -p -m 755 squashfs-ralink/squashfs3.2-r2/squashfs-tools/unsquashfs $RPM_BUILD_ROOT%{_bindir}/bat-unsquashfs-ralink
-install -D -p -m 755 cramfs/disk-utils/fsck.cramfs $RPM_BUILD_ROOT%{_bindir}/bat-fsck.cramfs
-install -D -p -m 755 unyaffs/unyaffs $RPM_BUILD_ROOT%{_bindir}/bat-unyaffs
+install -D -p -m 755 squashfs-broadcom/bat-unsquashfs-broadcom $RPM_BUILD_ROOT%{_bindir}/bat-unsquashfs-broadcom
+install -D -p -m 755 squashfs-openwrt/bat-unsquashfs-openwrt $RPM_BUILD_ROOT%{_bindir}/bat-unsquashfs-openwrt
+install -D -p -m 755 squashfs4.2/squashfs-tools/bat-unsquashfs42 $RPM_BUILD_ROOT%{_bindir}/bat-unsquashfs42
+install -D -p -m 755 squashfs-ralink/squashfs3.2-r2/squashfs-tools/bat-unsquashfs-ralink $RPM_BUILD_ROOT%{_bindir}/bat-unsquashfs-ralink
+install -D -p -m 755 cramfs/disk-utils/bat-fsck.cramfs $RPM_BUILD_ROOT%{_bindir}/bat-fsck.cramfs
+install -D -p -m 755 unyaffs/bat-unyaffs $RPM_BUILD_ROOT%{_bindir}/bat-unyaffs
 %files
 %{_bindir}/bat-unsquashfs-broadcom
 %{_bindir}/bat-unsquashfs-openwrt
