@@ -8,7 +8,7 @@ CFLAGS := $(INCLUDEDIR) -I$(LZMADIR) -I$(LINUXDIR)/include -D_FILE_OFFSET_BITS=6
 LZMAOBJS = LzmaEnc.o LzFind.o LzmaDec.o
 MKOBJS = mksquashfs.o read_fs.o sort.o sqlzma.o
 
-all: unsquashfs
+all: bat-unsquashfs-broadcom
 
 $(LZMAOBJS): %.o: $(LZMADIR)/%.c
 	$(CC) -c $(CFLAGS) $(CPPFLAGS) $^ -o $@
@@ -16,7 +16,7 @@ $(LZMAOBJS): %.o: $(LZMADIR)/%.c
 mksquashfs: $(MKOBJS) $(LZMAOBJS)
 	$(CC) $(MKOBJS) $(LZMAOBJS) -lz -lpthread -lm -lstdc++ -o $@
 
-unsquashfs: unsquashfs.o $(LZMAOBJS) sqlzma.o
+bat-unsquashfs-broadcom: unsquashfs.o $(LZMAOBJS) sqlzma.o
 	$(CC) unsquashfs.o  sqlzma.o $(LZMAOBJS) -lz -lpthread -lm -o $@
 
 clean:
