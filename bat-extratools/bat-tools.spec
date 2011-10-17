@@ -6,7 +6,8 @@ License: GPLv2 and GPLv2+
 Source: %{name}-%{version}.tar.gz
 Group: Development/Tools
 Packager: Armijn Hemel <armijn@binaryanalysis.org>
-BuildRequires: xz-devel, lzo-devel
+BuildRequires: xz-devel, lzo-devel, zlib-devel
+Requires: lzo, xz-libs, zlib
 
 %description
 A collection of extra tools for the Binary Analysis Tool, scraped from GPL source code releases and firmware replacement projects.
