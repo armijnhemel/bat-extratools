@@ -9,4 +9,5 @@ Homepage: http://www.binaryanalysis.org/
 Package: bat-extratools
 Architecture: any
 Depends: liblzo2-2, zlib1g, lzma, libc6
-Description: bat-extratools is a set of helper tools for the Binary Analysis Tool
+Description: set of helper tools for the Binary Analysis Tool
+ bat-extratools is a set of helper tools for the Binary Analysis Tool
