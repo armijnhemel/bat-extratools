@@ -5,11 +5,8 @@ Maintainer: Armijn Hemel <armijn@binaryanalysis.org>
 Build-Depends: debhelper (>= 7.0.50~), zlib1g-dev, liblzo2-dev, liblzma-dev
 Standards-Version: 3.8.4
 Homepage: http://www.binaryanalysis.org/
-#Vcs-Git: git://git.debian.org/collab-maint/bat.git
-#Vcs-Browser: http://git.debian.org/?p=collab-maint/bat.git;a=summary
 
 Package: bat-extratools
 Architecture: any
 Depends: liblzo2-2, zlib1g, lzma, libc6
-Description: <insert up to 60 chars description>
- bat-extratools is a set of helper tools for the Binary Analysis Tool
+Description: bat-extratools is a set of helper tools for the Binary Analysis Tool
