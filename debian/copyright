@@ -14,9 +14,9 @@ Copyright:
 
     <Copyright (C) 2010-2011 Armijn Hemel>
 
-License:
-
-GPLv2
+License: GPL-2
+ On Debian systems the full text of the GNU General Public License 2 can be found
+ in the `/usr/share/common-licenses/GPL-2' file.
 
 The Debian packaging is:
 
