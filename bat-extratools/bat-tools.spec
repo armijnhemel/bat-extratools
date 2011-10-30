@@ -6,7 +6,7 @@ License: GPLv2 and GPLv2+
 Source: %{name}-%{version}.tar.gz
 Group: Development/Tools
 Packager: Armijn Hemel <armijn@binaryanalysis.org>
-BuildRequires: xz-devel, lzo-devel, zlib-devel
+BuildRequires: xz-devel, lzo-devel, zlib-devel, ant
 Requires: lzo, xz-libs, zlib
 
 %description
@@ -24,6 +24,7 @@ install -D -p -m 755 squashfs4.2/squashfs-tools/bat-unsquashfs42 $RPM_BUILD_ROOT
 install -D -p -m 755 squashfs-ralink/squashfs3.2-r2/squashfs-tools/bat-unsquashfs-ralink $RPM_BUILD_ROOT%{_bindir}/bat-unsquashfs-ralink
 install -D -p -m 755 cramfs/disk-utils/bat-fsck.cramfs $RPM_BUILD_ROOT%{_bindir}/bat-fsck.cramfs
 install -D -p -m 755 unyaffs/bat-unyaffs $RPM_BUILD_ROOT%{_bindir}/bat-unyaffs
+install -D -p -m 755 dedexer/bat-ddx.jar $RPM_BUILD_ROOT%{_javadir}/bat-ddx.jar
 %files
 %{_bindir}/bat-unsquashfs-broadcom
 %{_bindir}/bat-unsquashfs-openwrt
@@ -31,3 +32,4 @@ install -D -p -m 755 unyaffs/bat-unyaffs $RPM_BUILD_ROOT%{_bindir}/bat-unyaffs
 %{_bindir}/bat-unsquashfs42
 %{_bindir}/bat-fsck.cramfs
 %{_bindir}/bat-unyaffs
+%{_javadir}/bat-ddx.jar
