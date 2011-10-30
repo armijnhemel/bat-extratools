@@ -10,3 +10,4 @@ Included are:
 * squashfs-openwrt - a different version of squashfs with LZMA compression that is used on devices that run OpenWrt derived distributions. Can sometimes also be used for different distributions.
 * squashfs4.2 - latest official version of squashfs with XZ, LZMA and LZO compression enabled by default.
 * unyaffs - from http://code.google.com/p/unyaffs/
+* dedexer - from http://dedexer.sourceforge.net/ - license on the webpage says "Dedexer is in the public domain, no rights are reserved. If you reuse it, please, retain the credits."

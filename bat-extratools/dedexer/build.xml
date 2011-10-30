@@ -1,0 +1,44 @@
+<project name="dedexer" default="package" basedir=".">
+
+
+<!-- Directories of the project -->
+<property name="home" value="."/>
+
+<!-- Directories derived from the source tree root -->
+<property name="classdir" value="${home}/classes"/>
+<property name="src" value="${home}/sources"/>
+
+<target name="init">
+<!-- Create the time stamp -->
+  <tstamp/>
+<!-- Create the build directory structure used by compile -->
+  <mkdir dir="${classdir}"/>
+</target>
+
+<target name="compile" depends="init">
+  <javac srcdir="${src}"
+         destdir="${classdir}"
+     debug="on">
+     <classpath>
+        <pathelement path="${classdir}"/>
+        <pathelement location="${junit_jar}"/>
+  </javac>
+</target>
+
+<target name="package" depends="compile">
+	<delete file="${home}/ddx.jar"/>
+	<jar destfile="${home}/ddx.jar"
+	   manifest="${home}/etc/manifest.mf">
+		<fileset dir="${classdir}">
+            <include name="**/dedexer/*"/>
+		</fileset>
+	</jar>
+</target>
+
+<target name="clean">
+<!-- Delete the ${build} directory trees -->
+  <delete dir="${classdir}"/>
+  <delete file="${home}/ddx.jar"/>
+</target>
+
+</project>
