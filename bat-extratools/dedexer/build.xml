@@ -21,7 +21,7 @@
      debug="on">
      <classpath>
         <pathelement path="${classdir}"/>
-        <pathelement location="${junit_jar}"/>
+    </classpath>
   </javac>
 </target>
 
