@@ -25,4 +25,4 @@ ddx:
 
 jds:
 	ant -f jdeserialize/build.xml
-	mv dedexer/jdeserialize.jar jdeserialize/bat-jdeserialize.jar
+	mv jdeserialize/jdeserialize.jar jdeserialize/bat-jdeserialize.jar
