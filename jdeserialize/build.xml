@@ -1,0 +1,40 @@
+<project name="jdeserialize" default="default" basedir=".">
+    <property name="build.dir" value="build" />
+    <property name="src.dir" value="src" />
+    <property name="javadoc.dir" value="javadoc" />
+
+    <target name="default" depends="compile, build-jar" />
+
+    <target name="compile">
+        <sequential>
+            <mkdir dir="${build.dir}" />
+            <javac srcdir="${src.dir}" destdir="${build.dir}" debug="on">
+                <compilerarg value="-Xlint" />
+            </javac>
+        </sequential>
+    </target>
+
+    <target name="build-jar">
+        <jar destfile="jdeserialize.jar" filesetmanifest="mergewithoutmain">
+            <fileset dir="${build.dir}" includes="**/*class" />
+            <fileset dir="." includes="${src.dir}/**/*" />
+            <fileset dir="." includes="build.xml" />
+            <fileset dir="." includes="README" />
+            <manifest>
+                <attribute name="Main-Class" value="org.unsynchronized.jdeserialize" />
+            </manifest>
+        </jar>
+    </target>
+
+    <target name="javadoc">
+        <sequential>
+            <mkdir dir="${build.dir}" />
+            <javadoc packagenames="org.unsynchronized.*"
+                sourcepath="${src.dir}"
+                destdir="${javadoc.dir}"
+                use="true">
+                <fileset dir="." includes="${src.dir}/**/*" />
+            </javadoc>
+        </sequential>
+    </target>
+</project>
