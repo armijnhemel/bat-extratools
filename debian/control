@@ -2,7 +2,7 @@ Source: bat-extratools
 Section: unknown
 Priority: extra
 Maintainer: Armijn Hemel <armijn@binaryanalysis.org>
-Build-Depends: debhelper (>= 7.0.50~), zlib1g-dev, liblzo2-dev, liblzma-dev, ant
+Build-Depends: debhelper (>= 7.0.50~), zlib1g-dev, liblzo2-dev, liblzma-dev, ant, default-jdk
 Standards-Version: 3.9.1
 Homepage: http://www.binaryanalysis.org/
 
