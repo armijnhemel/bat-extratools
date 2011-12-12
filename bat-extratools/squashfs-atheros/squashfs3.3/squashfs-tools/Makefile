@@ -12,7 +12,7 @@ endif
 CFLAGS += -I${Sqlzma} -D_REENTRANT -DNDEBUG ${DebugFlags}
 LDLIBS += -lz -lm -L${LzmaAlone} -L${LzmaC}
 #Tgt = mksquashfs unsquashfs
-Tgt = unsquashfs
+Tgt = bat-unsquashfs-atheros
 
 all: ${Tgt}
 
@@ -30,8 +30,10 @@ mksquashfs: mksquashfs.o read_fs.o sort.o
 unsquashfs.o: CFLAGS += -U_REENTRANT
 unsquashfs.o: unsquashfs.c squashfs_fs.h read_fs.h global.h \
 	${Sqlzma}/sqlzma.h ${Sqlzma}/sqmagic.h ${LzmaC}/libunlzma.a
-unsquashfs: LDLIBS += -lunlzma
-unsquashfs: unsquashfs.o
+#bat-unsquashfs-atheros: unsquashfs.o
+bat-unsquashfs-atheros: LDLIBS += -lunlzma
+bat-unsquashfs-atheros:  unsquashfs.o
+	$(CC) unsquashfs.o $(LDLIBS) -o $@
 
 clean:
 	${RM} *~ *.o ${Tgt}
