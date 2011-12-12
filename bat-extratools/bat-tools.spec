@@ -1,8 +1,8 @@
 Summary: A collection of extra tools for the Binary Analysis Tool
 Name: bat-extratools
-Version: 5.0
+Version: 6.0
 Release: 1
-License: GPLv2 and GPLv2+
+License: GPLv2, GPLv2+, BSD, public domain
 Source: %{name}-%{version}.tar.gz
 Group: Development/Tools
 Packager: Armijn Hemel <armijn@binaryanalysis.org>
@@ -10,7 +10,7 @@ BuildRequires: xz-devel, lzo-devel, zlib-devel, ant
 Requires: lzo, xz-libs, zlib
 
 %description
-A collection of extra tools for the Binary Analysis Tool, scraped from GPL source code releases and firmware replacement projects.
+A collection of extra tools for the Binary Analysis Tool, scraped from GPL source code releases and firmware replacement projects, plus projects.
 
 %prep
 %setup -q
