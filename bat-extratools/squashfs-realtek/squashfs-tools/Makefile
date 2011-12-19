@@ -205,7 +205,8 @@ $(error "COMP_DEFAULT isn't selected to be built!")
 endif
 
 .PHONY: all
-all: mksquashfs unsquashfs
+#all: mksquashfs unsquashfs
+all: bat-unsquashfs-realtek
 
 mksquashfs: $(MKSQUASHFS_OBJS)
 	$(CC) $(LDFLAGS) $(EXTRA_LDFLAGS) $(MKSQUASHFS_OBJS) $(LIBS) -o $@
@@ -238,7 +239,7 @@ lzo_wrapper.o: lzo_wrapper.c compressor.h squashfs_fs.h
 
 xz_wrapper.o: xz_wrapper.c compressor.h squashfs_fs.h
 
-unsquashfs: $(UNSQUASHFS_OBJS)
+bat-unsquashfs-realtek: $(UNSQUASHFS_OBJS)
 	$(CC) $(LDFLAGS) $(EXTRA_LDFLAGS) $(UNSQUASHFS_OBJS) $(LIBS) -o $@
 
 unsquashfs.o: unsquashfs.h unsquashfs.c squashfs_fs.h squashfs_swap.h \
