@@ -7,7 +7,7 @@ squashfsralink:
 	cd squashfs-ralink; make
 
 squashfsrealtek:
-	cd squashfs-realtek; make
+	cd squashfs-realtek/squashfs-tools; make
 
 squashfsatheros:
 	cd squashfs-atheros; make
