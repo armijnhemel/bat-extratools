@@ -6,7 +6,7 @@ License: GPLv2, GPLv2+, BSD, public domain
 Source: %{name}-%{version}.tar.gz
 Group: Development/Tools
 Packager: Armijn Hemel <armijn@binaryanalysis.org>
-BuildRequires: xz-devel, lzo-devel, zlib-devel, ant
+BuildRequires: xz-devel, lzo-devel, zlib-devel
 Requires: lzo, xz-libs, zlib
 
 %description
@@ -26,7 +26,6 @@ install -D -p -m 755 squashfs-openwrt/bat-unsquashfs-openwrt $RPM_BUILD_ROOT%{_b
 install -D -p -m 755 squashfs-ralink/squashfs3.2-r2/squashfs-tools/bat-unsquashfs-ralink $RPM_BUILD_ROOT%{_bindir}/bat-unsquashfs-ralink
 install -D -p -m 755 squashfs-realtek/squashfs-tools/bat-unsquashfs-realtek $RPM_BUILD_ROOT%{_bindir}/bat-unsquashfs-realtek
 install -D -p -m 755 unyaffs/bat-unyaffs $RPM_BUILD_ROOT%{_bindir}/bat-unyaffs
-install -D -p -m 755 dedexer/bat-ddx.jar $RPM_BUILD_ROOT%{_javadir}/bat-ddx.jar
 %files
 %{_bindir}/bat-unsquashfs42
 %{_bindir}/bat-unsquashfs-atheros
@@ -36,4 +35,3 @@ install -D -p -m 755 dedexer/bat-ddx.jar $RPM_BUILD_ROOT%{_javadir}/bat-ddx.jar
 %{_bindir}/bat-unsquashfs-realtek
 %{_bindir}/bat-fsck.cramfs
 %{_bindir}/bat-unyaffs
-%{_javadir}/bat-ddx.jar
