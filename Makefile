@@ -1,4 +1,4 @@
-all:	squashfsbroadcom squashfsralink squashfsrealtek squashfsatheros squashfsopenwrtold squashfs42 cramfsunpack unyaffsunpack ddx jds
+all:	squashfsbroadcom squashfsralink squashfsrealtek squashfsatheros squashfsopenwrtold squashfs42 cramfsunpack unyaffsunpack
 
 squashfsbroadcom:
 	cd squashfs-broadcom; make
@@ -24,11 +24,3 @@ cramfsunpack:
 
 unyaffsunpack:
 	cd unyaffs; make
-
-ddx:
-	ant -f dedexer/build.xml
-	mv dedexer/ddx.jar dedexer/bat-ddx.jar
-
-jds:
-	ant -f jdeserialize/build.xml
-	mv jdeserialize/jdeserialize.jar jdeserialize/bat-jdeserialize.jar
