@@ -2,12 +2,12 @@ Source: bat-extratools
 Section: misc
 Priority: extra
 Maintainer: Armijn Hemel <armijn@binaryanalysis.org>
-Build-Depends: debhelper (>= 7.0.50~), zlib1g-dev, liblzo2-dev, liblzma-dev, ant, default-jdk
+Build-Depends: debhelper (>= 7.0.50~), zlib1g-dev, liblzo2-dev, liblzma-dev
 Standards-Version: 3.9.1
 Homepage: http://www.binaryanalysis.org/
 
 Package: bat-extratools
 Architecture: any
-Depends: liblzo2-2, zlib1g, lzma, libc6, default-jre
+Depends: liblzo2-2, zlib1g, lzma, libc6
 Description: set of helper tools for the Binary Analysis Tool
  bat-extratools is a set of helper tools for the Binary Analysis Tool
