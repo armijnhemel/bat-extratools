@@ -2,7 +2,7 @@ Summary: A collection of extra tools for the Binary Analysis Tool
 Name: bat-extratools
 Version: 6.0
 Release: 1
-License: GPLv2, GPLv2+, BSD, public domain
+License: GPLv2, GPLv2+
 Source: %{name}-%{version}.tar.gz
 Group: Development/Tools
 Packager: Armijn Hemel <armijn@binaryanalysis.org>
