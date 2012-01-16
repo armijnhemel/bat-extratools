@@ -4,7 +4,7 @@ LZMAPATH = ./lzma/C/7zip/Compress/LZMA_Lib
 CFLAGS := -I$(INCLUDEDIR) -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -funroll-loops -mtune=opteron -march=opteron -mfpmath=sse -m3dnow -msse2 -m64 -O3 -D_LZMA_PARAMS 
 
 #all: mksquashfs-lzma unsquashfs
-all: mksquashfs-lzma bat-unsquashfs-ddwrt
+all: bat-unsquashfs-ddwrt
 
 mksquashfs: mksquashfs.o read_fs.o sort.o
 	$(CC) mksquashfs.o read_fs.o sort.o -lz -o $@
