@@ -21,6 +21,7 @@ sort.o: sort.c squashfs_fs.h global.h sort.h
 
 bat-unsquashfs-ddwrt: unsquashfs.o
 	#$(CC) unsquashfs.o -lz -o $@
+	make -C $(LZMAPATH)
 	$(CXX) unsquashfs.o -L$(LZMAPATH) -llzma -lpthread -o $@
 
 unsquashfs.o: unsquashfs.c squashfs_fs.h read_fs.h global.h
