@@ -1,0 +1,16 @@
+This directory contains several packages, that are packaged for use with BAT. They are either slightly modified by the authors of BAT, or are lifted from GPL source code releases from devices, or firmware replacement projects.
+
+They are completely separate from BAT and are not under the same license as BAT. Please check the individual directories for license conditions.
+
+Included are:
+
+* cramfs - a version of cramfs that can unpack cramfs (the standard version of Fedora can't) and which does not require root privileges
+* squashfs-atheros - a version of squashfs with LZMA compression that is used on devices that are based on certain Atheros chipsets. This is derived from squashfs+lzma from slax.org
+* squashfs-broadcom - a version of squashfs with LZMA compression that is used on devices that are based on certain Broadcom chipsets
+* squashfs-ralink - a version of squashfs with LZMA compression that is used on devices that are based on certain Ralink chipsets. This is derived from squashfs+lzma from slax.org
+* squashfs-realtek - a version of squashfs with LZMA compression that is used on devices that are based on certain Realtek chipsets. This one does not have LZMA headers, but immediately has the compressed data. The LZMA offsets are hardcoded in the kernel source code. Many thanks to Felix Fietkau from OpenWrt for extracting the right information from the Linux kernel headers and making it work!
+* squashfs-openwrt - a different version of squashfs with LZMA compression that is used on devices that run OpenWrt derived distributions. Can sometimes also be used for different distributions.
+* squashfs4.2 - latest official version of squashfs with XZ, LZMA and LZO compression enabled by default.
+* unyaffs - from http://code.google.com/p/unyaffs/
+* dedexer - from http://dedexer.sourceforge.net/ - license on the webpage says "Dedexer is in the public domain, no rights are reserved. If you reuse it, please, retain the credits."
+* jdeserialize - from http://code.google.com/p/jdeserialize/ - license in the source code says "public domain", on code.google.com it says 'New BSD license'

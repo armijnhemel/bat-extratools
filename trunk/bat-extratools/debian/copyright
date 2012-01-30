@@ -1,0 +1,23 @@
+This work was packaged for Debian by:
+
+    Armijn Hemel <armijn@binaryanalysis.org> on Tue, 18 Oct 2011 15:01:43 +0200
+
+It was downloaded from:
+
+    <http://www.binaryanalysis.org>
+
+Upstream Author(s):
+
+    Armijn Hemel <armijn@binaryanalysis.org>
+
+Copyright:
+
+    <Copyright (C) 2010-2011 Armijn Hemel>
+
+License: GPL-2
+ On Debian systems the full text of the GNU General Public License 2 can be found
+ in the `/usr/share/common-licenses/GPL-2' file.
+
+The Debian packaging is:
+
+    Copyright (C) 2010,2011 Armijn Hemel <armijn@binaryanalysis.org>
