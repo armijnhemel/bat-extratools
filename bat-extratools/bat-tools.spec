@@ -27,6 +27,7 @@ install -D -p -m 755 squashfs-ddwrt/bat-unsquashfs-ddwrt $RPM_BUILD_ROOT%{_bindi
 install -D -p -m 755 squashfs-ralink/squashfs3.2-r2/squashfs-tools/bat-unsquashfs-ralink $RPM_BUILD_ROOT%{_bindir}/bat-unsquashfs-ralink
 install -D -p -m 755 squashfs-realtek/squashfs-tools/bat-unsquashfs-realtek $RPM_BUILD_ROOT%{_bindir}/bat-unsquashfs-realtek
 install -D -p -m 755 unyaffs/bat-unyaffs $RPM_BUILD_ROOT%{_bindir}/bat-unyaffs
+install -D -p -m 755 romfsck/bat-romfsck $RPM_BUILD_ROOT%{_bindir}/bat-romfsck
 %files
 %{_bindir}/bat-unsquashfs42
 %{_bindir}/bat-unsquashfs-atheros
@@ -37,3 +38,4 @@ install -D -p -m 755 unyaffs/bat-unyaffs $RPM_BUILD_ROOT%{_bindir}/bat-unyaffs
 %{_bindir}/bat-unsquashfs-realtek
 %{_bindir}/bat-fsck.cramfs
 %{_bindir}/bat-unyaffs
+%{_bindir}/bat-romfsck

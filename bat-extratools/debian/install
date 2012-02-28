@@ -7,3 +7,4 @@ squashfs4.2/squashfs-tools/bat-unsquashfs42	usr/bin
 squashfs-realtek/squashfs-tools/bat-unsquashfs-realtek	usr/bin
 cramfs/disk-utils/bat-fsck.cramfs		usr/bin
 unyaffs/bat-unyaffs				usr/bin
+romfsck/bat-romfsck				usr/bin
