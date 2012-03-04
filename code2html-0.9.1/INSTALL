@@ -1,0 +1,44 @@
+*** INSTALL for code2html(1) ***
+*** $Revision: 1.2 $
+*** $Date: 2002/01/12 21:17:02 $
+
+Installing code2html
+--------------------
+
+o The code2html tarball comes with the following files:
+
+	CREDITS      Lists people that have contributed to code2html
+	ChangeLog    The Changelog. *duh*
+	INSTALL      The file you're reading right now.
+	LICENSE      This files contains the terms under wich you may
+	             use, modify, and redistribute code2html. Be sure
+	             to read and understand it.
+	README       The Readme file.
+	code2html    The code2html perl script itself.
+	code2html.1  The code2html man-page.
+
+
+o Location of your perl interpreter
+
+	If your perl interpreter is not /usr/bin/perl (do a `which
+	perl') you will have to change the first line in code2html to
+	reflect your location.
+
+o Copy Files
+
+	To install code2html on your system, copy the code2html file
+	itself to /usr/local/bin/ and make sure it has mode 755.
+
+	Then copy code2html.1 to your man1 directory, usually
+	/usr/local/man/man1/. It needs to have mode 644.
+
+	Additinally you may want to copy the rest du
+	/usr/share/doc/code2html or /usr/local/share/doc/code2html.
+
+	  file         destination             mode
+	 -------------------------------------------
+	  code2html    /usr/local/bin/         0755
+	  code2html.1  /usr/local/man/man1/    0644
+
+That's it, have fun.
+Peter Palfrader <code2html@palfrader.org>
