@@ -1,0 +1,446 @@
+.TH code2html 1 "" Mar-2000 ""
+.\" manual page by Peter Palfrader
+.\" using pages made by Jukka A. Ukkonen and pod as references
+.\" This manual page is under the same license as code2html itself. See below.
+
+.SH NAME
+.LP
+code2html \- Converts a program source code to HTML
+
+.SH SYNOPSIS
+.LP
+(1) \fBcode2html\fP [\fIoptions\fP] [\fIinput-file\fP [\fIoutput-file\fP]]
+.LP
+(2) \fBcode2html\fP \fB\-p\fP [\fIfile\fP [\fIalternate-outfile\fP]]
+.LP
+(3) \fBcode2html\fP (as a CGI script; see the section on \fICGI\fR)
+
+.SH DESCRIPTION
+.LP
+\fBcode2html\fR is a perl script which converts a program source code
+to syntax highlighted HTML, or any other format for wich rules are defined.
+
+.SS
+(1) OPTIONS
+.IP "\fIinput-file\fP" 8
+Is the file which contains the program source code to be formatted.
+If not specified or a minus (\-) is given, the code will be read from STDIN.
+
+.IP "\fIoutput-file\fP" 8
+Is the file to write the formatted code to.
+If not specified or a minus (\-) is given,
+the code will be written to STDOUT.
+
+.IP "\fB\-l\fP, \fB--language-mode\fP" 8
+Specify the set of regular expressions to use.
+These have to be defined in a language file (see \fBFILES\fR below).
+To find out which language modes are defined,
+issue a \fBcode2html --modes\fR.
+
+.IP
+This input is treated case-insensitive.
+
+.IP
+If not given, some heuristics will be used to determine the file language.
+
+.IP "\fB\-v\fP, \fB--verbose\fP" 8
+Prints progress information to STDERR.
+
+.IP "\fB\-n\fP, \fB--linenumbers\fP" 8
+Print out the source code with line numbers.
+
+.IP "\fB\-N\fR, \fB--linknumbers\fP" 8
+Print out the source code with line numbers.
+The linenumbers will link to themselves,
+which makes it easy to send links to lines.
+
+.IP "\fB\-P\fR, \fB--prefix\fP" 8
+Optional prefix to use for line number anchors.
+
+.IP "\fB\-t\fP, \fB--replace-tabs\fP[=\fITABSTOP-WIDTH\fP]" 8
+Replace each occurence of a \fC<TAB>\fP character with the right
+amount of spaces to get to the next tabstop.
+Default is a tabstop width of 8 characters.
+
+.IP "\fB\-L\fP, \fB--language-file\fP=\fILANGUAGE-FILE\fP" 8
+Specify an alternate file to take the language and output-format definitions
+from (see the section on \fBFILES\fP below).
+
+.IP "\fB\-m\fP, \fB--modes\fP" 8
+Print all language modes and output-formats currently defined to STDOUT and
+exit succesfully. Also prints modes from a \fILANGUAGE-FILE\fP given by
+\fB--language-file\fP if applicable.
+
+.IP "\fB--fallback\fP=\fILANG\fP" 8
+If the language mode given with \fB--language-mode\fP cannot be found then
+use this mode.
+
+.IP
+\fB--fallback plain\fP for instance is usefull when \fBcode2html\fP is called
+from a script to ensure output is created.
+
+.IP "\fB\-h\fP, \fB--help\fP" 8
+Print a short help and exit succesfully.
+
+.IP "\fB\-V\fP, \fB--version\fP" 8
+Print the program version and exit succesfully.
+
+.IP "\fB\-c\fP, \fB--content-type\fP" 8
+Prints \fC\*(rqContent\-Type: text/html\\n\\n\*(lq\fP
+(or whatever the output-format defines as a content-type)
+prior to the rest of the output.
+Usefull if the script is ivoked as a cgi script.
+
+.IP "\fB\-o\fP, \fB--output-format\fP" 8
+Selects the output-format. html is the default.
+To find out which outputformats are defined, issue a \fBcode2html --modes\fP.
+
+.IP "\fB\-H\fP, \fB--no-header\fP" 8
+do not make use of the template defined by the output-format.
+For HTML this means that there will be no \fC<html>\fP, \fC<head>\fP,
+and no \fC<typical for patch and CGI modes,pre>\fP tags.
+
+.IP "\fB--template\fP=\fIFILE\fP" 8
+overrides the default template for the given output format.
+If \fB--no-header\fP is given too, this has no meaning,
+since the template is ignored anyway.
+
+.IP "\fB\-T\fP, \fB--title\fP" 8
+Set the title of the produced output file.
+Only works if the template does support setting the title.
+
+.IP "\fB\-w\fP, \fB--linewidth\fP=\fILINEWIDTH\fP" 8
+Wrap lines after \fILINEWIDTH\fP characters. Default is to not wrap lines
+at all.
+
+.IP "\fB\-b\fP, \fB--linebreakprefix\fP=\fILINEPREFIX\fP" 8
+Use \fIfILINEPREFIX\fP at the start of wrapped lines. Default is "» ".
+
+
+
+.SS 
+(2) HTML patching
+
+.LP
+\fBcode2html\fP \fB\-p\fP [\fIfile\fP [\fIalternate-outfile\fP]]
+
+.LP
+\fBcode2html\fP also allows you to have inline source code in an html file.
+It can then take this html file and insert the syntax highlighted code.
+
+.LP
+If no file is given, \fBcode2html\fP reads from STDIN and writes to STDOUT.
+If just one file is given it replaces this file with the output.
+If two files are provided,
+the first one is read from and the second one written to.
+
+.LP
+To use this feature, just insert a like like this into your html file:
+
+.IP
+\fC<!\-\- code2html add [options] <file> \-\->\fP
+
+.LP
+the syntax highlighted file will be inserted at
+this position enclosed in \fC<pre>\fP tags.
+
+.LP
+All options that can be given on the command line like
+\fB--linenumbers\fP etc. work.
+\fB--help\fP, \fB--version\fP, etc. work too however it is not very
+intelligent to use them :).
+Using \fB--output-format\fP to choose a non-HTML
+outputformat is not adviseable.
+\fB--content-type\fP is ignored.
+
+.LP
+You may also write the program's source code directly in
+the html file with the following syntax:
+
+.IP
+\fC<!\-\- code2html add [options]
+.sp
+<your program source code here>
+.sp
+\-\->
+
+.LP
+It is usually a good idea to at least give
+the \fB--language-mode\fP option to specify the language.
+
+.SS
+(3) CGI
+.LP
+If the the script is used as a CGI script
+(\fBGATEWAY_INTERFACE\fP environment set and no command line arguments given)
+\fBcode2html\fP reads the arguments either from the query string or
+from SDTIN.
+(methods POST and GET).
+
+.LP
+\fB--content-type\fP is switched on automatically and
+the output always goes to STDOUT.
+
+.LP
+The following parameters/options are accepted:
+
+.IP "\fBlanguage-mode\fP \- optional" 8
+`c', `cc', `pas', etc.
+
+.IP
+if not given, some heuristics are used to find out the language.
+
+.IP "\fBfallback\fP \- optional" 8
+`plain', `c', etc. if language-mode cannot be found, use this one
+
+.IP "\fBinput-selector\fP \- optional" 8
+either `file', `cgi-input1', `cgi-input2', or `REDIRECT_URL'
+.IP
+default: file
+
+.IP "\fBfilename\fP" 8
+file to read from if \fBinput-selector\fP is `file'
+
+.IP "\fBcgi-input1\fP" 8
+The source code to syntax highlight.
+For example from a \fC<textarea>\fP or from a upload.
+See \fBinput-selector\fP.
+
+.IP "\fBcgi-input2\fP" 8
+The source code to syntax highlight.
+For example from a \fC<textarea>\fP or from a upload.
+See \fBinput-selector\fP.
+
+.IP "\fBline-numbers\fP \- optional" 8
+`yes', `no' or `link'
+.IP
+default: no
+
+.IP "\fBreplace-tabs\fP \- optional" 8
+If 0 then tabs are not replaced,
+else replace each occurence of a \fC<TAB>\fP character with
+the right amount of spaces to get to the next tabstop.
+.IP
+default: 0
+
+.IP "\fBtitle\fP \- optional" 8
+Set's the title of the file.
+
+.IP "\fBno-encoding\fP \- optional" 8
+By default \fBcode2html\fP tries to encode the output as either
+\fBbz2\fP/\fBgz\fP/\fBZ\fP if the client supports this
+(\fBHTTP_ACCEPT_ENCODING\fP) and the needed program is available
+on the server.
+You may need to modify \fB@CGI_ENCODING\fP in the script to match
+your program locations.
+
+.IP
+If \fBno-encoding\fP is defined as \*(lqtrue\*(rq
+\fBcode2html\fP does not try to encode the output.
+
+.LP
+Why two cgi-inputs you may ask: This is to allow your
+users to choose vie a \fC<form>\fP interface whether they want
+to insert their file into a \fC<textarea>\fP or user a \fC<browse>\fP
+button to select their file. See the example on my home-
+page.
+
+.LP
+Note that if \fB$FILES_DISALLOWED_IN_CGI\fP is 0 it is possbile for
+your users to read all the files the httpd can read (if you don't run
+a cgi- wrapper or something like this. By default this value is set to
+1, so file reading via cgi should not be allowed. You can allow it
+with setting \fB$FILES_DISALLOWED_IN_CGI\fP to 0 at the top of the
+script.
+
+.LP
+The input selector \fBREDIRECT_URL\fP needs a special
+explaination. The file name is formed from the two
+enviroment variables \fBDOCUMENT_ROOT\fP and \fBREDIRECT_URL\fP.
+
+.LP
+If you want apache to automatically call \fBcode2html\fP for all
+program source code files you may do this by adding these
+two lines to your srm.conf:
+
+.IP
+\fCAddHandler text/x-sourcecode .c .cc .cpp .pas .h .p
+.sp
+Action text/x-sourcecode /cgi\-bin/code2html?input-selector=REDIRECT_URL&foo=\fP
+
+.LP
+or something similar to this. In the AddHandle line you can
+choose which extensions to pass through \fBcode2html\fP.
+
+.LP
+\fBWARNING\fP: Do not add .pl to this line and name this script
+\*(lqcode2html.pl\*(rq. This will result in a loop.
+
+.LP
+Also make sure that you load the Action module (srm.conf).
+
+.LP
+Replace /cgi-bin/code2html with the virtual location under
+which the file can be accessed. Note the \*(lqfoo=\*(rq part.
+Apache appends the URL of the file to display at the end of
+the action part. We do not need this since we use the
+environment variable \fBREDIRECT_URL\fP however we do not want
+to get the url addes to the input-selector string.
+Therefore we append the \*(lq&foo=\*(rq part.
+
+.LP
+Tnx to Kevin Burton <burton@relativity.yi.org> for the idea.
+He also states that
+
+.LP
+\fC> It is more powerfull if you use it in an Apache
+.br
+> <Directory> tag
+.br
+>
+.br
+> <Directory /source>
+.br
+>
+.br
+>  #with your Action tag here... this way you can 
+.br
+>  #still have regular .java files on your server.
+.br
+>
+.br
+> </Directory>
+.br
+>\fP
+
+
+.SH EXAMPLE
+
+.LP
+assuming \fBcode2html\fP is in the current directory, you may type
+.sp
+.ce
+code2html -l perl code2html.pl code2html.html
+.sp
+to convert the script into a html file.
+
+.SH FILES
+.LP
+\fBCode2html\fP looks for it's configuration in several places.
+
+.IP \(bu 4
+the file specified by \fB\-L\fP or \fB--language-file\fP if any
+.IP \(bu 4
+the files specified in the evironment variable \fBCODE2HTML_CONFIG\fP,
+seperated by colons
+.IP \(bu 4
+user's \fI$HOME/.code2html.config\fP
+.IP \(bu 4
+\fI/etc/code2html.config\fP
+.IP \(bu 4
+built in default languages
+
+.LP
+Entries in a file that is mentioned earlier in this list override
+rules from later files.
+
+.LP
+The file structure must be valid perl code. 
+
+.LP
+The global variables \fB%LANGUAGE\fP and \fB%STYLESHEET\fP are
+already defined, so you should not redeclare them using \*(lqmy\*(rq.
+
+.LP
+When you are looking for a model configuration to serve as a basis
+for your own configuration file,
+it is probably best to start out by checking the built-in definitions
+at the bottom of \fBcode2html\fP.
+
+.LP
+If your pattern includes back references like
+a lot patterns do in perl for example,
+then you have to use \\2 instead of \\1,
+\\3 instead of \\2 and so on.
+I really don't like this hack but it is a lot faster. 
+
+.LP
+Example:
+.sp
+.ce
+\fC<<([^\\n]*).*?^\\2$\fP
+
+.LP
+In this example the perl << stuff is matched,
+i.e. everything from a << until a line that consists of exactly
+the same string as behind the << was.
+The \\2 references the matched chars in the parentenses.
+
+.LP
+If you ever write language specific rule files yourself,
+I'd be grateful if you could send those to me,
+so I could make them available (with full credits of course)
+on my homepage for anyone to grab,
+whenever some of those files suit someone else's needs.
+Before you do so you might also have a look at my site to
+check wheter someone has already written a rule file for your
+favourite language.
+
+.SH NOTES
+
+.LP
+The language recognition mechanism relies on specific patterns
+within the file name and the content of the processed file,
+such as file name extensions and shebangs (#!).
+This means that if the input is a pipe or a socket,
+the file name does not follow traditional naming conventions,
+or the content of the processed file is incomplete,
+the input language name should be specified using
+the \fB--language-mode\fP command line parameter.
+
+.SH BUGS
+
+.LP
+Please report bugs to code2html@palfrader.org.
+This program is still a beta release,
+so you should expect to find some.
+.br
+Also have a look at my web-site,
+perhaps a new version is available already at
+\fIhttp://www.palfrader.org/code2html/\fP.
+
+.SH AUTHOR
+
+.LP
+Peter Palfrader, <code2html@palfrader.org>
+A lot of other people.
+See contributers in the file itself.
+
+.SH LICENSE
+
+.LP
+Copyright (c) 1999, 2000 by Peter Palfrader & others.
+
+.LP
+Permission is hereby granted, free of charge,
+to any person obtaining a copy of this software and
+associated documentation files
+(the \*(lqSoftware\*(rq, to deal in the Software without restriction,
+including without limitation the rights to use, copy, modify, merge,
+publish, distribute, sublicense, and/or sell copies of the Software,
+and to permit persons to whom the Software is furnished to do so,
+subject to the following conditions:
+
+.LP
+The above copyright notice and this permission notice shall be included
+in all copies or substantial portions of the Software.
+
+.LP
+THE SOFTWARE IS PROVIDED \*(lqAS IS\*(rq,
+WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
+INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
+DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH
+THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
