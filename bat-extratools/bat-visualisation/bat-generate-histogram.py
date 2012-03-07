@@ -47,9 +47,9 @@ ar = area.T(x_coord = category_coord.T(data, 0),
             bg_style = fill_style.gray90,
             border_line_style = line_style.default,
             size = (2560,200),
-            legend = legend.T(loc=(80,10)))
+            legend = legend.T(loc=(40,-30)))
 
 chart_object.set_defaults(bar_plot.T, direction="vertical", data=data)
 
-ar.add_plot(bar_plot.T(label="bytes"))
+ar.add_plot(bar_plot.T(label="Amount of bytes"))
 ar.draw(can)
