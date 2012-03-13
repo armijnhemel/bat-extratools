@@ -23,7 +23,8 @@ if options.outputfile == None:
 data1 = {}
 for i in range(0,256):
 	data1[i] = 0
-datafile = open('/usr/bin/vim')
+## TODO: sanity checks
+datafile = open(options.inputfile)
 offset = 0
 datafile.seek(offset)
 databuffer = datafile.read(100000)
