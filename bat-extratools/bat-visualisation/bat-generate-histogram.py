@@ -27,20 +27,21 @@ for i in range(0,256):
 datafile = open(options.inputfile)
 offset = 0
 datafile.seek(offset)
-databuffer = datafile.read(100000)
+databuffer = datafile.read(1000000)
 while databuffer != '':
 	for i in range(0,256):
 		data1[i] = data1[i] + databuffer.count(chr(i))
-	offset = offset + 100000
+	offset = offset + 1000000
 	datafile.seek(offset)
-	databuffer = datafile.read(100000)
+	databuffer = datafile.read(1000000)
 
 data = []
-for i in range(0, 256):
+for i in range(255, -1, -1):
 	data.append((i,data1[i]))
 
 can = canvas.init(options.outputfile)
 
+'''
 ar = area.T(x_coord = category_coord.T(data, 0),
             x_grid_style=line_style.gray50_dash1,
             x_axis=axis.X(label="Byte values", format="/a-90{}%d"),
@@ -51,6 +52,18 @@ ar = area.T(x_coord = category_coord.T(data, 0),
             legend = legend.T(loc=(40,-30)))
 
 chart_object.set_defaults(bar_plot.T, direction="vertical", data=data)
+'''
+
+ar = area.T(y_coord = category_coord.T(data, 0),
+            y_grid_style=line_style.gray50_dash1,
+            y_axis=axis.Y(label="Byte values", format="%d"),
+            x_axis=axis.X(label="Frequency"),
+            bg_style = fill_style.gray90,
+            border_line_style = line_style.default,
+            size = (300,2560),
+            legend = legend.T(loc=(40,-30)))
+
+chart_object.set_defaults(bar_plot.T, direction="horizontal", data=data)
 
 ar.add_plot(bar_plot.T(label="Amount of bytes"))
 ar.draw(can)
