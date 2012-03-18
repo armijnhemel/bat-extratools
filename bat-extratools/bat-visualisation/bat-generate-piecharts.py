@@ -17,7 +17,7 @@ if options.outputfile == None:
 	parser.error("Path to output file needed")
 
 picklefile = open(options.inputfile, 'rb')
-data = cPickle.load()
+data = cPickle.load(picklefile)
 picklefile.close()
 
 can = canvas.init(options.outputfile)
