@@ -22,12 +22,11 @@ picklefile.close()
 
 can = canvas.init(options.outputfile)
 
+theme.scale_factor = 1.5
 theme.use_color = 1
 theme.reinitialize()
 
-#data = [("foo", 10),("bar", 20), ("baz", 30), ("ao", 40), ("oe", 40), ('ah', 50), ('woohoo', 60), ('unf', 100), ('yo', 22), ('blaat', 1000), ('blebber', 1000)]
-
-ar = area.T(size=(400,400), legend=legend.T(loc=(0,-20)),
+ar = area.T(size=(350,350), legend=legend.T(loc=(-40,-10)),
             x_grid_style = None, y_grid_style = None)
 
 ## http://home.gna.org/pychart/doc/module-color.html
@@ -71,6 +70,6 @@ fill_style.rdiag3_fine,
 fill_style.horiz_fine,
 fill_style.vert_fine ]
 
-plot = pie_plot.T(data=data, radius = 150, arc_offsets=[0,0,0,0], fill_styles = fill_styles)
+plot = pie_plot.T(data=data, radius = 125, arc_offsets=[0,0,0,0], fill_styles = fill_styles)
 ar.add_plot(plot)
 ar.draw()
