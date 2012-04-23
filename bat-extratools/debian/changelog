@@ -1,3 +1,11 @@
+bat-extratools (7.0) unstable; urgency=low
+
+  * variant of squashfs
+  * romfs unpacker
+  * visualisation scripts
+
+ -- Armijn Hemel <armijn@binaryanalysis.org>  Mon, 23 Apr 2012 23:37:00 +0200
+
 bat-extratools (6.0) unstable; urgency=low
 
   * add more variants of squashfs
