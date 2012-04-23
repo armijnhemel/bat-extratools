@@ -41,4 +41,5 @@ install -D -p -m 755 bat-visualisation/bat-generate-version-chart.py $RPM_BUILD_
 %{_bindir}/bat-fsck.cramfs
 %{_bindir}/bat-unyaffs
 %{_bindir}/bat-romfsck
+%{_bindir}/bat-code2html
 %{_bindir}/bat-generate-version-chart.py
