@@ -1,3 +1,5 @@
+#!/usr/bin/python
+
 import sys, cPickle
 from pychart import *
 from optparse import OptionParser

@@ -1,3 +1,5 @@
+#!/usr/bin/python
+
 import sys
 from pychart import *
 from optparse import OptionParser
