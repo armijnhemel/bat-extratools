@@ -1,0 +1,220 @@
+#!/usr/bin/python
+#-*- coding: utf-8 -*-
+
+## Binary Analysis Tool
+## Copyright 2012 Armijn Hemel for Tjaldur Software Governance Solutions
+## Licensed under the GNU General Public License 2.0, see COPYING for details
+
+'''
+This file contains code to extract data from a Minix file system.
+
+Information from:
+
+* /usr/share/magic (identifiers)
+* Minix 3 source code
+* analysis of Minix file systems from actual devices
+* Linux kernel headers
+'''
+
+import array, sys, os, os.path
+from optparse import OptionParser
+
+def readMinix(path, outpath):
+	## first suck in the file system. This can probably be done more
+	## efficiently, but most Minix file systems we see are very small
+	## TODO: do this more efficient.
+	minixfile = open(path)
+	minixdata = minixfile.read()
+	minixfile.close()
+
+	## some arrays we'll use for easier reading of data
+	chararray = array.array('B')
+	short = array.array('H')
+	intarray = array.array('I')
+
+	## first 1K of data is the bootblock, so not interesting
+	## The next block is called the "superblock"
+	## Parse the superblock here
+	superblock = minixdata[1024:2048]
+
+	## number of inodes
+	short.fromstring(superblock[0:2])
+	ninodes = short.pop()
+	
+	## number of zones (currently not used)
+	short.fromstring(superblock[2:4])
+	nzones = short.pop()
+
+	## number of inode bitmap blocks
+	short.fromstring(superblock[4:6])
+	imapblocks = short.pop()
+
+	## number of zones bitmap blocks
+	short.fromstring(superblock[6:8])
+	zmapblocks = short.pop()
+
+	## absolute offset of first data block
+	short.fromstring(superblock[8:10])
+	firstdatazone = short.pop()
+
+	## unused
+	short.fromstring(superblock[10:12])
+	logzonesize = short.pop()
+
+	## magic identifier
+	short.fromstring(superblock[16:18])
+	magic = short.pop()
+	## TODO: add magic checks
+
+	## unused
+	short.fromstring(superblock[18:20])
+	state = short.pop()
+
+	## unused
+	intarray.fromstring(superblock[12:16])
+	maxsize = intarray.pop()
+
+	## unused
+	intarray.fromstring(superblock[20:24])
+	zones = intarray.pop()
+
+	## Process the inodes. First we need to know where the blocks for
+	## the inodes start. Bootblock and superblock are both 1K.
+	offset = 2048 + (zmapblocks + imapblocks)*1024
+
+	## For each inode we can extract some data
+	## Each inodes is 32 bytes in minix file system version 1
+	inodes = {}
+	ignores = []
+	for i in range(1, ninodes+2):
+		short.fromstring(minixdata[offset:offset+2])
+		## mode contains mode + file type
+		mode = short.pop()
+		## filter file types here, since only directories and files
+		## are of interest now, the rest ends up in "ignores" list
+		## from Linux kernel stat.h
+		## #define S_IFSOCK 0140000
+		## #define S_IFLNK  0120000
+		## #define S_IFBLK  0060000
+		## #define S_IFCHR  0020000
+		## #define S_IFIFO  0010000
+		res = 00170000 & mode
+		if res == 0120000 or res == 0140000 or res == 0060000 or res == 0020000 or res == 0010000:
+			ignores.append(i)
+			offset += 32
+			continue
+		if res == 0040000:
+			filetype = 'directory'
+		else:
+			filetype = 'file'
+
+		## UID of the file, unused
+		short.fromstring(minixdata[offset+2:offset+4])
+		uid = short.pop()
+
+		## size of the file
+		intarray.fromstring(minixdata[offset+4:offset+8])
+		inodesize = intarray.pop()
+
+		## time data of file, unused
+		intarray.fromstring(minixdata[offset+8:offset+12])
+		inodetime = intarray.pop()
+
+		## GID of file, unused
+		chararray.fromstring(minixdata[offset+12:offset+13])
+		gid = chararray.pop()
+
+		## number of links, unused
+		chararray.fromstring(minixdata[offset+13:offset+14])
+		numberoflinks = chararray.pop()
+
+		## record which zones a file has
+		inodezones = []
+		for r in range(0,9):
+			short.fromstring(minixdata[offset+14+r*2:offset+16+r*2])
+			inodezone = short.pop()
+			inodezones.append(inodezone)
+		if not i == ninodes:
+			offset += 32
+		inodes[i] = {'mode': mode, 'uid': uid, 'size': inodesize, 'gid': gid, 'links': numberoflinks, 'zones': inodezones, 'type': filetype }
+
+	inodename = {}
+	inodename[1] = '/'
+	## reverse mapping for recording what the parent of a file/directory is
+	reversedir = {}
+	for i in inodes:
+		if inodes[i]['type'] == 'directory':
+			zonecounter = 0
+			## TODO: indirect blocks and double indirect blocks
+			while zonecounter< 7:
+				if (inodes[i]['zones'][zonecounter]) == 0:
+					zonecounter += 1
+					continue
+				else:
+					offset = 1024 * (inodes[i]['zones'][zonecounter])
+					for r in range(0,1024/32):
+						short.fromstring(minixdata[offset:offset+2])
+						inodenr = short.pop()
+						if inodenr != 0 and not inodenr in ignores:
+							nodename = minixdata[offset+2:offset+32].split('\x00', 1)[0]
+							if nodename != '.' and nodename != '..':
+								inodename[inodenr] = nodename
+								reversedir[inodenr] = i
+						offset += 32
+					zonecounter += 1
+		elif inodes[i]['type'] == 'file':
+			## extract data from datablocks
+			data = ""
+			zonecounter = 0
+			while zonecounter< 7:
+				if inodes[i]['zones'][zonecounter] == 0:
+					zonecounter += 1
+					continue
+				offset = 1024 * (inodes[i]['zones'][zonecounter])
+				data = data + minixdata[offset:offset+1024]
+				zonecounter += 1
+			## TODO: double indirect blocks
+			if inodes[i]['zones'][7] != 0:
+				offset = 1024 * (inodes[i]['zones'][7])
+				indirect = minixdata[offset:offset+1024]
+				for r in range(0,512):
+					short.fromstring(indirect[r*2:r*2+2])
+					zonenumber = short.pop()
+					if zonenumber == 0:
+						continue
+					else:
+						data = data + minixdata[zonenumber*1024:zonenumber*1024 + 1024]
+			if data == '':
+				continue
+			## recurse into the dir tree and construct the path
+			pathcomponents = [inodename[i]]
+			parent = reversedir[i]
+			while parent != 1:
+				pathcomponents.insert(0,inodename[parent])
+				parent = reversedir[parent]
+			normpath = ''
+			for p in pathcomponents:
+				normpath = os.path.join(normpath, p)
+			normpath = os.path.join(outpath, normpath)
+			try:
+				os.makedirs(os.path.dirname(normpath))
+			except Exception, e:
+				pass
+			try:
+				datafile = open(normpath, 'wb')
+				## print the data. Since we know how big it is we can cut off when we have enough data
+				datafile.write(data[0:inodes[i]['size']])
+				datafile.close()
+			except:
+				pass
+
+parser = OptionParser()
+parser.add_option("-i", "--input", action="store", dest="inputfile", help="path to input file", metavar="FILE")
+parser.add_option("-o", "--output", action="store", dest="outputdir", help="path to output directory", metavar="DIR")
+(options, args) = parser.parse_args()
+if options.inputfile == None:
+        parser.error("Path to input file needed")
+if options.outputdir == None:
+        parser.error("Path to output directory needed")
+
+readMinix(options.inputfile, options.outputdir)
