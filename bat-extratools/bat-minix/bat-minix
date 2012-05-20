@@ -62,9 +62,12 @@ def readMinix(path, outpath):
 	logzonesize = short.pop()
 
 	## magic identifier
+	## Right now only allow certain file systems that are on use
+	## on various IP cameras
+	if superblock[16:18] != "\x8f\x13":
+		return False
 	short.fromstring(superblock[16:18])
 	magic = short.pop()
-	## TODO: add magic checks
 
 	## unused
 	short.fromstring(superblock[18:20])
@@ -163,7 +166,7 @@ def readMinix(path, outpath):
 						offset += 32
 					zonecounter += 1
 		elif inodes[i]['type'] == 'file':
-			## extract data from datablocks
+			## extract data from datablocks and write it to a file
 			data = ""
 			zonecounter = 0
 			while zonecounter< 7:
@@ -184,6 +187,8 @@ def readMinix(path, outpath):
 						continue
 					else:
 						data = data + minixdata[zonenumber*1024:zonenumber*1024 + 1024]
+
+			## no need to write empty files
 			if data == '':
 				continue
 			## recurse into the dir tree and construct the path
@@ -202,11 +207,13 @@ def readMinix(path, outpath):
 				pass
 			try:
 				datafile = open(normpath, 'wb')
-				## print the data. Since we know how big it is we can cut off when we have enough data
+				## write the data. Since it is known how big it is from the
+				## inode it can be cut off at the right size
 				datafile.write(data[0:inodes[i]['size']])
 				datafile.close()
 			except:
 				pass
+	return True
 
 parser = OptionParser()
 parser.add_option("-i", "--input", action="store", dest="inputfile", help="path to input file", metavar="FILE")
@@ -217,4 +224,6 @@ if options.inputfile == None:
 if options.outputdir == None:
         parser.error("Path to output directory needed")
 
-readMinix(options.inputfile, options.outputdir)
+res = readMinix(options.inputfile, options.outputdir)
+if not res:
+	sys.exit(1)
