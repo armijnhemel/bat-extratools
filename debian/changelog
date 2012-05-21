@@ -1,3 +1,10 @@
+bat-extratools (8.0) unstable; urgency=low
+
+  * fixes to visualisation script
+  * add unpacker for Minix v1 file systems
+
+ -- Armijn Hemel <armijn@binaryanalysis.org>  Mon, 21 May 2012 19:32:41 +0200
+
 bat-extratools (7.0) unstable; urgency=low
 
   * variant of squashfs
