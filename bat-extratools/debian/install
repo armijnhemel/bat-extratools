@@ -10,3 +10,4 @@ unyaffs/bat-unyaffs				usr/bin
 romfsck/bat-romfsck				usr/bin
 code2html-0.9.1/bat-code2html			usr/bin
 bat-visualisation/bat-generate-version-chart.py	usr/bin
+bat-minix/bat-minix				usr/bin

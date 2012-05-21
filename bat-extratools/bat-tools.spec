@@ -1,6 +1,6 @@
 Summary: A collection of extra tools for the Binary Analysis Tool
 Name: bat-extratools
-Version: 7.0
+Version: 8.0
 Release: 1
 License: GPLv2, GPLv2+
 Source: %{name}-%{version}.tar.gz
@@ -30,6 +30,7 @@ install -D -p -m 755 unyaffs/bat-unyaffs $RPM_BUILD_ROOT%{_bindir}/bat-unyaffs
 install -D -p -m 755 romfsck/bat-romfsck $RPM_BUILD_ROOT%{_bindir}/bat-romfsck
 install -D -p -m 755 code2html-0.9.1/bat-code2html $RPM_BUILD_ROOT%{_bindir}/bat-code2html
 install -D -p -m 755 bat-visualisation/bat-generate-version-chart.py $RPM_BUILD_ROOT%{_bindir}/bat-generate-version-chart.py
+install -D -p -m 755 bat-minix/bat-minix $RPM_BUILD_ROOT%{_bindir}/bat-minix
 %files
 %{_bindir}/bat-unsquashfs42
 %{_bindir}/bat-unsquashfs-atheros
@@ -42,4 +43,5 @@ install -D -p -m 755 bat-visualisation/bat-generate-version-chart.py $RPM_BUILD_
 %{_bindir}/bat-unyaffs
 %{_bindir}/bat-romfsck
 %{_bindir}/bat-code2html
+%{_bindir}/bat-minix
 %{_bindir}/bat-generate-version-chart.py
