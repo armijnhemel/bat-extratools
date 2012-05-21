@@ -41,7 +41,7 @@ def readMinix(path, outpath):
 	short.fromstring(superblock[0:2])
 	ninodes = short.pop()
 	
-	## number of zones (currently not used)
+	## number of zones. equal to file size in some
 	short.fromstring(superblock[2:4])
 	nzones = short.pop()
 
@@ -65,7 +65,7 @@ def readMinix(path, outpath):
 	## Right now only allow certain file systems that are on use
 	## on various IP cameras
 	if superblock[16:18] != "\x8f\x13":
-		return False
+		return
 	short.fromstring(superblock[16:18])
 	magic = short.pop()
 
@@ -213,7 +213,7 @@ def readMinix(path, outpath):
 				datafile.close()
 			except:
 				pass
-	return True
+	return nzones * 1024
 
 parser = OptionParser()
 parser.add_option("-i", "--input", action="store", dest="inputfile", help="path to input file", metavar="FILE")
@@ -225,5 +225,8 @@ if options.outputdir == None:
         parser.error("Path to output directory needed")
 
 res = readMinix(options.inputfile, options.outputdir)
-if not res:
+if res == None:
 	sys.exit(1)
+else:
+	print res
+	sys.exit(0)
