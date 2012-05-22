@@ -1,0 +1,26 @@
+bat-extratools (8.0) unstable; urgency=low
+
+  * fixes to visualisation script
+  * add unpacker for Minix v1 file systems
+
+ -- Armijn Hemel <armijn@binaryanalysis.org>  Mon, 21 May 2012 19:32:41 +0200
+
+bat-extratools (7.0) unstable; urgency=low
+
+  * variant of squashfs
+  * romfs unpacker
+  * visualisation scripts
+
+ -- Armijn Hemel <armijn@binaryanalysis.org>  Mon, 23 Apr 2012 23:37:00 +0200
+
+bat-extratools (6.0) unstable; urgency=low
+
+  * add more variants of squashfs
+
+ -- Armijn Hemel <armijn@binaryanalysis.org>  Thu, 12 Jan 2012 15:00:42 +0100
+
+bat-extratools (5.0) unstable; urgency=low
+
+  * Initial release
+
+ -- Armijn Hemel <armijn@binaryanalysis.org>  Mon, 17 Oct 2011 18:23:43 +0200
