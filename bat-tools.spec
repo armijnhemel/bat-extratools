@@ -6,7 +6,7 @@ License: GPLv2, GPLv2+
 Source: %{name}-%{version}.tar.gz
 Group: Development/Tools
 Packager: Armijn Hemel <armijn@binaryanalysis.org>
-BuildRequires: xz-devel, lzo-devel, zlib-devel, make
+BuildRequires: xz-devel, lzo-devel, zlib-devel, make, gcc-c++
 Requires: lzo, xz-libs, zlib, pychart
 
 %description
