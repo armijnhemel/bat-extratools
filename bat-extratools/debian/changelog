@@ -2,7 +2,7 @@ bat-extratools (11.0) unstable; urgency=low
 
   * version bump to keep in sync with the rest
 
- -- Armijn Hemel <armijn@binaryanalysis.org>  Sun, 7 December 2013 17:27:11 +0100
+ -- Armijn Hemel <armijn@binaryanalysis.org>  Sun, 7 January 2013 17:27:11 +0100
 
 bat-extratools (10.0) unstable; urgency=low
 
