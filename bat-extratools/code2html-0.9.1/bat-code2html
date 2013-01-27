@@ -2386,6 +2386,7 @@ $LANGUAGE{'c++'}        = {
 $LANGUAGE{'cc'}         = $LANGUAGE{'c++'};
 $LANGUAGE{'cpp'}        = $LANGUAGE{'c++'};
 $LANGUAGE{'cxx'}        = $LANGUAGE{'c++'};
+$LANGUAGE{'txx'}        = $LANGUAGE{'c++'};
 
 
 
