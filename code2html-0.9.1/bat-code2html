@@ -2258,7 +2258,7 @@ $LANGUAGE{'c'}          = {
 # taken from nedit
 # modified by PP
 $LANGUAGE{'c++'}        = {
-                            'filename'   => '\\.(c(c|pp|xx|\+\+)|h(h|pp|xx|\+\+)|C(C|PP|pp|XX)?|H(H|PP|XX)?|i|qml|txx)$',
+                            'filename'   => '\\.(c(c|pp|xx|\+\+)|h(h|pp|xx|\+\+)|C(C|PP|pp|XX)?|H(H|PP|XX|xx)?|i|qml|txx)$',
                             'regex'      => '',
                             'patterns'   => [
                                               {
