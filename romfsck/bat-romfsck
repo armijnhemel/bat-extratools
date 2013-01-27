@@ -15,9 +15,16 @@ the exact format.
 import os, sys, os.path, struct, shutil
 from optparse import OptionParser
 
-## TODO
+## The checksum in romfs is basically:
+## * chop the data up in int32 (big endian)
+## * add them
+## * squeeze it in an int32 and just use the remainder
 def computechecksum(romfsbytes):
-	pass
+	total = 0
+	int32 = pow(2,32)
+	for i in range(0, len(romfsbytes), 4):
+		total = total + struct.unpack('>L', romfsbytes[i:i+4])[0]
+	return total%int32
 
 ## Unpack the file system, do basic sanity checks first.
 def unpackromfs(romfsfile, unpackdir):
@@ -62,6 +69,12 @@ def unpackromfs(romfsfile, unpackdir):
 	else:
 		fileheaderstart = romfsfilenameend + 1
 
+	## romfs documentation talks about "first 512 bytes"
+	## but it is unclear what that means to me. Does this include
+	## the header? The file name? The raw data of the files without
+	## the headers? Questions, questions...
+	# romfsbytes = romfsdata[fileheaderstart:fileheaderstart+512]
+	# computechecksum(romfsbytes)
 	## keep a list of old values to return to when cleaning up
 	## to help unpacking directories
 	returnunpackdirs = []
