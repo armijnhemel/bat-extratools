@@ -2550,7 +2550,7 @@ $LANGUAGE{'html'}       = {
 # taken from nedit
 # modified by PP
 $LANGUAGE{'java'}       = {
-                            'filename'   => '\\.(java|Java|JAVA|groovy|scala)$',
+                            'filename'   => '\\.(java|Java|JAVA|groovy|Groovy|scala)$',
                             'regex'      => '',
                             'patterns'   => [
                                               {
