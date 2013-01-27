@@ -2258,7 +2258,7 @@ $LANGUAGE{'c'}          = {
 # taken from nedit
 # modified by PP
 $LANGUAGE{'c++'}        = {
-                            'filename'   => '\\.(c(c|pp|xx)|h(h|pp|xx)|C(C|PP|XX)?|H(H|PP|XX)?|i|qml|txx)$',
+                            'filename'   => '\\.(c(c|pp|xx|++)|h(h|pp|xx|++)|C(C|PP|XX)?|H(H|PP|XX)?|i|qml|txx)$',
                             'regex'      => '',
                             'patterns'   => [
                                               {
@@ -2550,7 +2550,7 @@ $LANGUAGE{'html'}       = {
 # taken from nedit
 # modified by PP
 $LANGUAGE{'java'}       = {
-                            'filename'   => '\\.(java|groovy|scala)$',
+                            'filename'   => '\\.(java|Java|JAVA|groovy|scala)$',
                             'regex'      => '',
                             'patterns'   => [
                                               {
