@@ -2127,7 +2127,7 @@ $LANGUAGE{'awk'}       =  {
 # taken from nedit
 # modified by PP
 $LANGUAGE{'c'}          = {
-                            'filename'   => '\\.[ch]$',
+                            'filename'   => '\\.[chsS]$',
                             'regex'      => '',
                             'patterns'   => [
                                               {
