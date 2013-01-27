@@ -53,19 +53,21 @@ def unpackromfs(romfsfile, unpackdir):
 		return None
 
 	romfsdata = romfs.read(4)
-	## 4. compute checksum (TODO)
+	## 4. extract checksum
 	romfschecksum = struct.unpack('>L', romfsdata)[0]
 
 	romfs.seek(0)
 	romfsdata = romfs.read()
 	romfs.close()
+
 	## 5. the file name is always padded to 16 bytes. Verify that
-	## the last of filename + padding is actually 0x00
-	## TODO: verify that everything from end of the file name to
-	## end of padding is 0x00
+	## the last of filename + padding is actually 0x00 and verify that
+	## everything from end of the file name to end of padding is also 0x00
 	romfsfilenameend = romfsdata.find('\x00', 16)
 	if (romfsfilenameend - 16)%16 != 0:
 		fileheaderstart = ((romfsfilenameend/16) + 1) * 16
+		if not list(set(romfsdata[romfsfilenameend:fileheaderstart])) == ['\x00']:
+			return None
 	else:
 		fileheaderstart = romfsfilenameend + 1
 
@@ -73,8 +75,10 @@ def unpackromfs(romfsfile, unpackdir):
 	## but it is unclear what that means to me. Does this include
 	## the header? The file name? The raw data of the files without
 	## the headers? Questions, questions...
+	## TODO
 	# romfsbytes = romfsdata[fileheaderstart:fileheaderstart+512]
 	# computechecksum(romfsbytes)
+
 	## keep a list of old values to return to when cleaning up
 	## to help unpacking directories
 	returnunpackdirs = []
@@ -113,8 +117,10 @@ def unpackromfs(romfsfile, unpackdir):
 		if filesize > romfsfilesize:
 			return None
 
-		filechecksum = struct.unpack('>L', romfsdata[fileheaderstart+12:fileheaderstart+16])[0]
-		## TODO: verify checksum
+		## Extract checksum if we ever want to use it. I don't think it is
+		## used in the Linux kernel driver either.
+		#filechecksum = struct.unpack('>L', romfsdata[fileheaderstart+12:fileheaderstart+16])[0]
+
 		filenameend = romfsdata.find('\x00', fileheaderstart+16)
 		filename = romfsdata[fileheaderstart+16:filenameend]
 
@@ -143,8 +149,9 @@ def unpackromfs(romfsfile, unpackdir):
 				os.link(offsetnames[specialinfo], filename)
 				os.chdir(oldcwd)
 			else:
-				## store some information, unpack later TODO
 				## Does this really ever happen?
+				## Testing with various file systems suggests
+				## this is not the case.
 				pass
 
 		## entry is a directory. Create it in the output directory
