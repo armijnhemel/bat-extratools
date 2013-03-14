@@ -7,7 +7,7 @@ all: bat-unsquashfs-atheros2
 CC=gcc
 CXX=g++
 
-bat-unsquashfs-openwrt2: unsquashfs.o liblzma.a
+bat-unsquashfs-atheros2: unsquashfs.o liblzma.a
 	$(CXX) unsquashfs.o -L$(LZMAPATH) -llzma -o $@
 
 unsquashfs.o: unsquashfs.c squashfs_fs.h read_fs.h global.h
