@@ -1,6 +1,6 @@
 Summary: A collection of extra tools for the Binary Analysis Tool
 Name: bat-extratools
-Version: 12.1
+Version: 13.0
 Release: 1
 License: GPLv2, GPLv2+
 Source: %{name}-%{version}.tar.gz
@@ -21,6 +21,7 @@ rm -rf $RPM_BUILD_ROOT
 install -D -p -m 755 cramfs/disk-utils/bat-fsck.cramfs $RPM_BUILD_ROOT%{_bindir}/bat-fsck.cramfs
 install -D -p -m 755 squashfs4.2/squashfs-tools/bat-unsquashfs42 $RPM_BUILD_ROOT%{_bindir}/bat-unsquashfs42
 install -D -p -m 755 squashfs-atheros/squashfs3.3/squashfs-tools/bat-unsquashfs-atheros $RPM_BUILD_ROOT%{_bindir}/bat-unsquashfs-atheros
+install -D -p -m 755 squashfs-atheros2/bat-unsquashfs-atheros2 $RPM_BUILD_ROOT%{_bindir}/bat-unsquashfs-atheros2
 install -D -p -m 755 squashfs-broadcom/bat-unsquashfs-broadcom $RPM_BUILD_ROOT%{_bindir}/bat-unsquashfs-broadcom
 install -D -p -m 755 squashfs-openwrt/bat-unsquashfs-openwrt $RPM_BUILD_ROOT%{_bindir}/bat-unsquashfs-openwrt
 install -D -p -m 755 squashfs-ddwrt/bat-unsquashfs-ddwrt $RPM_BUILD_ROOT%{_bindir}/bat-unsquashfs-ddwrt

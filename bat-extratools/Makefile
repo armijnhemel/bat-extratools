@@ -1,4 +1,4 @@
-all:	squashfsbroadcom squashfsralink squashfsrealtek squashfsatheros squashfsopenwrtold squashfsddwrt squashfs42 cramfsunpack unyaffsunpack
+all:	squashfsbroadcom squashfsralink squashfsrealtek squashfsatheros squashfsatheros2 squashfsopenwrtold squashfsddwrt squashfs42 cramfsunpack unyaffsunpack
 
 squashfsbroadcom:
 	cd squashfs-broadcom; make
@@ -11,6 +11,9 @@ squashfsrealtek:
 
 squashfsatheros:
 	cd squashfs-atheros; make
+
+squashfsatheros2:
+	cd squashfs-atheros2; make
 
 squashfsopenwrtold:
 	cd squashfs-openwrt; make
