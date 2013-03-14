@@ -35,6 +35,7 @@ install -D -p -m 755 bat-minix/bat-minix $RPM_BUILD_ROOT%{_bindir}/bat-minix
 %files
 %{_bindir}/bat-unsquashfs42
 %{_bindir}/bat-unsquashfs-atheros
+%{_bindir}/bat-unsquashfs-atheros2
 %{_bindir}/bat-unsquashfs-broadcom
 %{_bindir}/bat-unsquashfs-openwrt
 %{_bindir}/bat-unsquashfs-ddwrt
