@@ -228,9 +228,9 @@ def unpackromfs(romfsfile, unpackdir):
 	return True
 
 def main(argv):
-	oldskool = True
-	## TODO: in BAT 13 the option parser should be used. For BAT 12.1 the old bat-romfsck behaviour should
-	## be emulated
+	## parameter to emulate old behaviour of romfsck. Set to False by default. Change to True if you need
+	## the old behaviour
+	oldskool = False
 	if not oldskool:
 		parser = OptionParser()
 		parser.add_option("-b", "--binary", action="store", dest="romfsfile", help="path to binary file", metavar="FILE")
