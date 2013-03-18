@@ -7,6 +7,7 @@ Included are:
 * cramfs - a version of cramfs that can unpack cramfs (the standard version of Fedora can't) and which does not require root privileges
 * bat-romfsck - a script to unpack romfs file systems.
 * squashfs-atheros - a version of squashfs with LZMA compression that is used on devices that are based on certain Atheros chipsets. This is derived from squashfs+lzma from slax.org
+* squashfs-atheros2 - a version of squashfs with LZMA compression that is used on devices that are based on certain Atheros chipsets. This version is much like OpenWrt's variant.
 * squashfs-broadcom - a version of squashfs with LZMA compression that is used on devices that are based on certain Broadcom chipsets
 * squashfs-ralink - a version of squashfs with LZMA compression that is used on devices that are based on certain Ralink chipsets. This is derived from squashfs+lzma from slax.org
 * squashfs-realtek - a version of squashfs with LZMA compression that is used on devices that are based on certain Realtek chipsets. This one does not have LZMA headers, but immediately has the compressed data. The LZMA offsets are hardcoded in the kernel source code. Many thanks to Felix Fietkau from OpenWrt for extracting the right information from the Linux kernel headers and making it work!
