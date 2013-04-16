@@ -160,8 +160,9 @@ def unpackromfs(romfsfile, unpackdir):
 		if types == 1:
 			if filesize != 0:
 				return None
-			returnoffsets.append(nextheader)
-			returnunpackdirs.append(unpackdir)
+			if nextheader != 0:
+				returnoffsets.append(nextheader)
+				returnunpackdirs.append(unpackdir)
 			unpackdir = os.path.join(unpackdir, filename)
 			try:
 				os.makedirs(unpackdir)
@@ -199,6 +200,10 @@ def unpackromfs(romfsfile, unpackdir):
 			os.chdir(unpackdir)
 			os.symlink(source, filename)
 			os.chdir(oldcwd)
+			if nextheader == 0:
+				if returnoffsets != [] and returnunpackdirs != []:
+					nextheader = returnoffsets.pop()
+					unpackdir = returnunpackdirs.pop()
 
 		## block device, skip
 		elif types == 4:
