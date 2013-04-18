@@ -1,11 +1,12 @@
+cramfs/disk-utils/bat-fsck.cramfs		usr/bin
+squashfs4.2/squashfs-tools/bat-unsquashfs42	usr/bin
+squashfs-atheros/squashfs3.3/squashfs-tools/bat-unsquashfs-atheros	usr/bin
+squashfs-atheros2/bat-unsquashfs-atheros2	usr/bin
 squashfs-broadcom/bat-unsquashfs-broadcom	usr/bin
 squashfs-openwrt/bat-unsquashfs-openwrt		usr/bin
 squashfs-ddwrt/bat-unsquashfs-ddwrt		usr/bin
 squashfs-ralink/squashfs3.2-r2/squashfs-tools/bat-unsquashfs-ralink	usr/bin
-squashfs-atheros/squashfs3.3/squashfs-tools/bat-unsquashfs-atheros	usr/bin
-squashfs4.2/squashfs-tools/bat-unsquashfs42	usr/bin
 squashfs-realtek/squashfs-tools/bat-unsquashfs-realtek	usr/bin
-cramfs/disk-utils/bat-fsck.cramfs		usr/bin
 unyaffs/bat-unyaffs				usr/bin
 romfsck/bat-romfsck				usr/bin
 code2html-0.9.1/bat-code2html			usr/bin
