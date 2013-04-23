@@ -82,6 +82,7 @@ def main(argv):
 		yaffsunpackfail = False
 
 		objectidtoname = {}
+		objectidtofullname = {}
 		objectparent = {}
 		outfile = None
 
@@ -133,6 +134,7 @@ def main(argv):
 					while newparentid != 1:
 						yaffsname = os.path.join(objectidtoname[newparentid], yaffsname)
 						newparentid = objectparent[newparentid]
+					objectidtofullname[objectId] = yaffsname
 					if options.verbose:
 						print "unpacking", yaffsname
 
@@ -186,7 +188,10 @@ def main(argv):
 						pass
 					yaffsunpacked = True
 				elif chunktype == YAFFS_OBJECT_TYPE_HARDLINK:
-					print "CHUNK hardlink"
+					## create a hard link.
+					## TODO: more sanity checks
+					linkname = os.path.join(unpackdir, yaffsname)
+					os.link(os.path.join(unpackdir, objectidtofullname[equivalentObjectId]), linkname)
 				elif chunktype == YAFFS_OBJECT_TYPE_SPECIAL:
 					print "CHUNK special"
 				else:
