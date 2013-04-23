@@ -1,6 +1,6 @@
 #!/usr/bin/python
 
-import sys, os, os.path, struct
+import sys, os, os.path, struct, tempfile
 
 '''
 Yaffs2 unpacker reimplemention, heavily borrowing from unyaffs created
@@ -31,6 +31,8 @@ YAFFS_OBJECT_TYPE_SPECIAL = 5
 ## test file system from one of those Realtek based devices
 image_file = open('yaffs2_1.img')
 
+unpackdir = tempfile.mkdtemp()
+
 image_file.seek(0)
 bytesread = 0
 
@@ -42,6 +44,8 @@ if yaffs2filesize%(CHUNK_SIZE + SPARE_SIZE) != 0:
 
 objectidtoname = {}
 objectparent = {}
+
+outfile = None
 
 ## read in the blocks of data
 while not bytesread >= os.stat('yaffs2_1.img').st_size:
@@ -58,7 +62,10 @@ while not bytesread >= os.stat('yaffs2_1.img').st_size:
 
 	## check if the file is a new file
 	if byteCount == 0xffff:
+		if outfile != None:
+			outfile.close()
 		offset = 0
+		oid = objectId
 		## new file, so process the chunk data
 		## first read in the object header
 		chunktype = struct.unpack('<L', chunkdata[offset:offset+4])[0]
@@ -90,7 +97,7 @@ while not bytesread >= os.stat('yaffs2_1.img').st_size:
 			while newparentid != 1:
 				yaffsname = os.path.join(objectidtoname[newparentid], yaffsname)
 				newparentid = objectparent[newparentid]
-			print yaffsname
+			print "unpacking", yaffsname
 
 		yst_mode = struct.unpack('<L', chunkdata[offset:offset+4])[0]
 		offset = offset + 4
@@ -116,7 +123,6 @@ while not bytesread >= os.stat('yaffs2_1.img').st_size:
 		equivalentObjectId = struct.unpack('<L', chunkdata[offset:offset+4])[0]
 		offset = offset + 4
 
-    		#char alias[YAFFS_MAX_ALIAS_LENGTH + 1];
 		## extract the alias, up to the first '\x00' character
 		## and store it
 		aliasname = chunkdata[offset:offset+YAFFS_MAX_ALIAS_LENGTH+1]
@@ -128,13 +134,19 @@ while not bytesread >= os.stat('yaffs2_1.img').st_size:
 		offset = offset + YAFFS_MAX_ALIAS_LENGTH + 1
 
 		if chunktype == YAFFS_OBJECT_TYPE_FILE:
-			print "CHUNK file"
+			outname = os.path.join(unpackdir, yaffsname)
+			outfile = open(outname, 'wb')
 		elif chunktype == YAFFS_OBJECT_TYPE_SYMLINK:
 			if aliasname != None:
-				print "ALIAS", aliasname
+				symlink = os.path.join(unpackdir, yaffsname)
+				os.symlink(aliasname, symlink)
 		elif chunktype == YAFFS_OBJECT_TYPE_DIRECTORY:
 			## create the directory and move on
-			print "CHUNK directory"
+			createdir = os.path.join(unpackdir, yaffsname)
+			try:
+				os.makedirs(createdir)
+			except:
+				pass
 		elif chunktype == YAFFS_OBJECT_TYPE_HARDLINK:
 			print "CHUNK hardlink"
 		elif chunktype == YAFFS_OBJECT_TYPE_SPECIAL:
@@ -144,7 +156,10 @@ while not bytesread >= os.stat('yaffs2_1.img').st_size:
 		pass
 	else:
 		## block with data
-		print "BYTECOUNT", byteCount
+		outfile.write(chunkdata[:byteCount])
 
 	## move on to the next chunk
 	bytesread = bytesread + len(chunkdata) + len(sparedata)
+
+if outfile != None:
+	outfile.close()
