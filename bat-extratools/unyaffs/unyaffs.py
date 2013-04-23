@@ -204,5 +204,10 @@ def main(argv):
 			outfile.close()
 	image_file.close()
 
+	if not yaffsunpacked:
+		if options.verbose:
+			print >>sys.stderr, "YAFFS2 image could not be unpacked"
+		sys.exit(1)
+
 if __name__ == "__main__":
 	main(sys.argv)
