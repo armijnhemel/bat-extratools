@@ -97,6 +97,10 @@ def main(argv):
 			chunkId = struct.unpack('<L', sparedata[8:12])[0]
 			byteCount = struct.unpack('<L', sparedata[12:16])[0]
 
+			if byteCount > 0xffff:
+				yaffsunpackfail = True
+				break
+
 			## check if the file is a new file
 			if byteCount == 0xffff:
 				if outfile != None:
