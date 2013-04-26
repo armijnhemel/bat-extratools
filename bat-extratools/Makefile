@@ -1,4 +1,4 @@
-all:	squashfsbroadcom squashfsralink squashfsrealtek squashfsatheros squashfsatheros2 squashfsopenwrtold squashfsddwrt squashfs42 cramfsunpack unyaffsunpack
+all:	squashfsbroadcom squashfsralink squashfsrealtek squashfsatheros squashfsatheros2 squashfsopenwrtold squashfsddwrt squashfs42 cramfsunpack
 
 squashfsbroadcom:
 	cd squashfs-broadcom; make
@@ -28,5 +28,5 @@ cramfsunpack:
 	cd cramfs; ./configure --without-ncurses; make
 	mv cramfs/disk-utils/fsck.cramfs cramfs/disk-utils/bat-fsck.cramfs
 
-unyaffsunpack:
-	cd unyaffs; make
+#unyaffsunpack:
+#	cd unyaffs; make
