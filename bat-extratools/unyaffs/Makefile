@@ -1,4 +1,4 @@
-all:	bat-unyaffs
+#all:	bat-unyaffs
 
-bat-unyaffs: unyaffs.c unyaffs.h
-	$(CC) -o bat-unyaffs unyaffs.c unyaffs.h
+#bat-unyaffs: unyaffs.c unyaffs.h
+#	$(CC) -o bat-unyaffs unyaffs.c unyaffs.h

@@ -140,7 +140,7 @@ def main(argv):
 						newparentid = objectparent[newparentid]
 					objectidtofullname[objectId] = yaffsname
 					if options.verbose:
-						print "unpacking", yaffsname
+						print >>sys.stderr, "unpacking", yaffsname
 
 				yst_mode = struct.unpack('<L', chunkdata[offset:offset+4])[0]
 				offset = offset + 4
@@ -197,9 +197,11 @@ def main(argv):
 					linkname = os.path.join(unpackdir, yaffsname)
 					os.link(os.path.join(unpackdir, objectidtofullname[equivalentObjectId]), linkname)
 				elif chunktype == YAFFS_OBJECT_TYPE_SPECIAL:
-					print "CHUNK special"
+					## root privileges are needed for this and BAT is usually run as non-root
+					pass
+					#print >>sys.stderr, "CHUNK special"
 				else:
-					print "CHUNK unknown"
+					print >>sys.stderr, "CHUNK unknown"
 					yaffsunpackfail = True
 			else:
 				## block with data, just write the chunkdata to the output file
