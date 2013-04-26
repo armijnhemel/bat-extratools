@@ -12,11 +12,16 @@ from optparse import OptionParser
 parser = OptionParser()
 parser.add_option("-i", "--input", action="store", dest="inputfile", help="path to input pickle", metavar="FILE")
 parser.add_option("-o", "--output", action="store", dest="outputfile", help="path to output file", metavar="FILE")
+parser.add_option("-t", "--text", action="store", dest="xaxistext", help="text to display on Y-axis")
 (options, args) = parser.parse_args()
 if options.inputfile == None:
         parser.error("Path to input file needed")
 if options.outputfile == None:
         parser.error("Path to output file needed")
+if options.xaxistext == None:
+	xaxistext = "Versions"
+else:
+	xaxistext = options.xaxistext
 
 picklefile = open(options.inputfile, 'rb')
 data = cPickle.load(picklefile)
@@ -31,7 +36,7 @@ can = canvas.init(options.outputfile)
 
 ar = area.T(x_coord = category_coord.T(data, 0),
             x_grid_style=line_style.gray50_dash1,
-            x_axis=axis.X(label="Versions", format="/a-90{}%s"),
+            x_axis=axis.X(label=xaxistext, format="/a-90{}%s"),
             y_axis=axis.Y(label="Frequency"),
             bg_style = fill_style.gray90,
             border_line_style = line_style.default,
