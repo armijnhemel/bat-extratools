@@ -30,7 +30,7 @@ install -D -p -m 755 squashfs-realtek/squashfs-tools/bat-unsquashfs-realtek $RPM
 install -D -p -m 755 unyaffs/bat-unyaffs $RPM_BUILD_ROOT%{_bindir}/bat-unyaffs
 install -D -p -m 755 romfsck/bat-romfsck $RPM_BUILD_ROOT%{_bindir}/bat-romfsck
 install -D -p -m 755 code2html-0.9.1/bat-code2html $RPM_BUILD_ROOT%{_bindir}/bat-code2html
-install -D -p -m 755 bat-visualisation/bat-generate-version-chart.py $RPM_BUILD_ROOT%{_bindir}/bat-generate-version-chart.py
+install -D -p -m 755 bat-visualisation/bat-generate-chart.py $RPM_BUILD_ROOT%{_bindir}/bat-generate-chart.py
 install -D -p -m 755 bat-minix/bat-minix $RPM_BUILD_ROOT%{_bindir}/bat-minix
 %files
 %{_bindir}/bat-unsquashfs42
@@ -46,4 +46,4 @@ install -D -p -m 755 bat-minix/bat-minix $RPM_BUILD_ROOT%{_bindir}/bat-minix
 %{_bindir}/bat-romfsck
 %{_bindir}/bat-code2html
 %{_bindir}/bat-minix
-%{_bindir}/bat-generate-version-chart.py
+%{_bindir}/bat-generate-chart.py
