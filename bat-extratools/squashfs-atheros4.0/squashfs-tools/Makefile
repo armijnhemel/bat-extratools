@@ -10,7 +10,7 @@ ifdef USE_LZMA
   CFLAGS += $(LZMA_CFLAGS)
 endif
 
-all: unsquashfs
+all: bat-unsquashfs-atheros40
 
 mksquashfs: lzmalib mksquashfs.o read_fs.o sort.o swap.o pseudo.o uncompress.o
 	$(CC) mksquashfs.o read_fs.o sort.o swap.o pseudo.o uncompress.o -lz -lpthread -lm $(LZMA_LIB) -o $@
@@ -30,7 +30,7 @@ pseudo.o: pseudo.c pseudo.h Makefile
 
 uncompress.o: uncompress.c uncompress.h
 
-unsquashfs: lzmalib unsquashfs.o unsquash-1.o unsquash-2.o unsquash-3.o unsquash-4.o swap.o uncompress.o
+bat-unsquashfs-atheros40: lzmalib unsquashfs.o unsquash-1.o unsquash-2.o unsquash-3.o unsquash-4.o swap.o uncompress.o
 	$(CC) unsquashfs.o unsquash-1.o unsquash-2.o unsquash-3.o unsquash-4.o swap.o uncompress.o -lz -lpthread -lm $(LZMA_LIB) -o $@
 
 unsquashfs.o: unsquashfs.h unsquashfs.c squashfs_fs.h squashfs_swap.h squashfs_compat.h global.h uncompress.h Makefile
