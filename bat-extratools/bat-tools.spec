@@ -24,6 +24,7 @@ install -D -p -m 755 squashfs-atheros/squashfs3.3/squashfs-tools/bat-unsquashfs-
 install -D -p -m 755 squashfs-atheros2/bat-unsquashfs-atheros2 $RPM_BUILD_ROOT%{_bindir}/bat-unsquashfs-atheros2
 install -D -p -m 755 squashfs-atheros4.0/squashfs-tools/bat-unsquashfs-atheros40 $RPM_BUILD_ROOT%{_bindir}/bat-unsquashfs-atheros40
 install -D -p -m 755 squashfs-broadcom/bat-unsquashfs-broadcom $RPM_BUILD_ROOT%{_bindir}/bat-unsquashfs-broadcom
+install -D -p -m 755 squashfs-broadcom40/squashfs_4.0/bat-unsquashfs-broadcom40 $RPM_BUILD_ROOT%{_bindir}/bat-unsquashfs-broadcom40
 install -D -p -m 755 squashfs-openwrt/bat-unsquashfs-openwrt $RPM_BUILD_ROOT%{_bindir}/bat-unsquashfs-openwrt
 install -D -p -m 755 squashfs-ddwrt/bat-unsquashfs-ddwrt $RPM_BUILD_ROOT%{_bindir}/bat-unsquashfs-ddwrt
 install -D -p -m 755 squashfs-ralink/squashfs3.2-r2/squashfs-tools/bat-unsquashfs-ralink $RPM_BUILD_ROOT%{_bindir}/bat-unsquashfs-ralink
@@ -39,6 +40,7 @@ install -D -p -m 755 bat-minix/bat-minix $RPM_BUILD_ROOT%{_bindir}/bat-minix
 %{_bindir}/bat-unsquashfs-atheros2
 %{_bindir}/bat-unsquashfs-atheros40
 %{_bindir}/bat-unsquashfs-broadcom
+%{_bindir}/bat-unsquashfs-broadcom40
 %{_bindir}/bat-unsquashfs-openwrt
 %{_bindir}/bat-unsquashfs-ddwrt
 %{_bindir}/bat-unsquashfs-ralink
