@@ -13,12 +13,12 @@ endif
 CFLAGS += -I${Sqlzma} -D_REENTRANT -DNDEBUG ${DebugFlags}
 LDFLAGS += -L${LzmaAlone} -L${LzmaC}
 
-all: unsquashfs
+all: bat-unsquashfs-broadcom40
 
 mksquashfs: mksquashfs.o read_fs.o sort.o swap.o pseudo.o
 	$(CC) $(LDFLAGS) mksquashfs.o read_fs.o sort.o swap.o pseudo.o -lz -lpthread -lm -lunlzma_r -llzma_r -lstdc++ -o $@
 
-unsquashfs: unsquashfs.o unsquash-1.o unsquash-2.o unsquash-3.o unsquash-4.o swap.o 
+bat-unsquashfs-broadcom40: unsquashfs.o unsquash-1.o unsquash-2.o unsquash-3.o unsquash-4.o swap.o 
 	$(CC) $(LDFLAGS) unsquashfs.o unsquash-1.o unsquash-2.o unsquash-3.o unsquash-4.o swap.o -lz -lpthread -lm -lunlzma_r -llzma_r -lstdc++ -o $@
 
 mksquashfs.o: mksquashfs.c squashfs_fs.h mksquashfs.h global.h sort.h squashfs_swap.h Makefile \
