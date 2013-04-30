@@ -4,7 +4,7 @@ squashfs-atheros/squashfs3.3/squashfs-tools/bat-unsquashfs-atheros	usr/bin
 squashfs-atheros2/bat-unsquashfs-atheros2	usr/bin
 squashfs-atheros4.0/squashfs-tools/bat-unsquashfs-atheros40	usr/bin
 squashfs-broadcom/bat-unsquashfs-broadcom	usr/bin
-squashfs-broadcom/squashfs_4.0/bat-unsquashfs-broadcom40	usr/bin
+squashfs-broadcom40/squashfs_4.0/bat-unsquashfs-broadcom40	usr/bin
 squashfs-openwrt/bat-unsquashfs-openwrt		usr/bin
 squashfs-ddwrt/bat-unsquashfs-ddwrt		usr/bin
 squashfs-ralink/squashfs3.2-r2/squashfs-tools/bat-unsquashfs-ralink	usr/bin
