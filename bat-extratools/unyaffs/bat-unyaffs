@@ -71,10 +71,10 @@ def main(argv):
 
 	image_file = open(yaffs2file)
 
-	image_file.seek(0)
-
 	yaffsunpacked = False
 	for cs in chunksandspares:
+		image_file.seek(0)
+
 		if yaffsunpacked:
 			break
 		(CHUNK_SIZE, SPARE_SIZE) = cs
