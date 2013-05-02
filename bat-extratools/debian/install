@@ -9,6 +9,7 @@ squashfs-openwrt/bat-unsquashfs-openwrt		usr/bin
 squashfs-ddwrt/bat-unsquashfs-ddwrt		usr/bin
 squashfs-ralink/squashfs3.2-r2/squashfs-tools/bat-unsquashfs-ralink	usr/bin
 squashfs-realtek/squashfs-tools/bat-unsquashfs-realtek	usr/bin
+squashfs-realtek/squashfs-2.1-r2/bat-unsquashfs-realtek2	usr/bin
 unyaffs/bat-unyaffs				usr/bin
 romfsck/bat-romfsck				usr/bin
 code2html-0.9.1/bat-code2html			usr/bin
