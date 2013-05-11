@@ -19,7 +19,7 @@ mksquashfs: mksquashfs.o read_fs.o sort.o swap.o pseudo.o
 	$(CC) $(LDFLAGS) mksquashfs.o read_fs.o sort.o swap.o pseudo.o -lz -lpthread -lm -lunlzma_r -llzma_r -lstdc++ -o $@
 
 bat-unsquashfs-broadcom40: unsquashfs.o unsquash-1.o unsquash-2.o unsquash-3.o unsquash-4.o swap.o 
-	$(CC) $(LDFLAGS) unsquashfs.o unsquash-1.o unsquash-2.o unsquash-3.o unsquash-4.o swap.o -lz -lpthread -lm -lunlzma_r -llzma_r -lstdc++ -o $@
+	$(CC) $(LDFLAGS) unsquashfs.o unsquash-1.o unsquash-2.o unsquash-3.o unsquash-4.o swap.o -lpthread -lm -lunlzma_r -llzma_r -lstdc++ -lz -o $@
 
 mksquashfs.o: mksquashfs.c squashfs_fs.h mksquashfs.h global.h sort.h squashfs_swap.h Makefile \
 	${Sqlzma}/sqlzma.h ${Sqlzma}/sqmagic.h \
