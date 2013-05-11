@@ -1,3 +1,11 @@
+bat-extratools (14.0) unstable; urgency=high
+
+  * replace bat-unyaffs with reimplementation in Python to avoid segfaults
+  * add another squashfs variant from newer Atheros SDK
+  * add another squashfs variant from newer Broadcom SDK
+
+ -- Armijn Hemel <armijn@binaryanalysis.org>  Sat, 11 May 2013 16:41:41 +0200
+
 bat-extratools (13.0) unstable; urgency=low
 
   * add another squashfs variant (Atheros)
