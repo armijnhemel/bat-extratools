@@ -12,5 +12,4 @@ squashfs-realtek/squashfs-tools/bat-unsquashfs-realtek	usr/bin
 unyaffs/bat-unyaffs				usr/bin
 romfsck/bat-romfsck				usr/bin
 code2html-0.9.1/bat-code2html			usr/bin
-bat-visualisation/bat-generate-chart.py	usr/bin
 bat-minix/bat-minix				usr/bin

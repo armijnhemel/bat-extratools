@@ -7,7 +7,7 @@ Source: %{name}-%{version}.tar.gz
 Group: Development/Tools
 Packager: Armijn Hemel <armijn@binaryanalysis.org>
 BuildRequires: xz-devel, lzo-devel, zlib-devel, make, gcc-c++
-Requires: lzo, xz-libs, zlib, pychart
+Requires: lzo, xz-libs, zlib
 
 %description
 A collection of extra tools for the Binary Analysis Tool, scraped from GPL source code releases and firmware replacement projects, plus projects.
@@ -33,7 +33,6 @@ install -D -p -m 755 squashfs-realtek/squashfs-tools/bat-unsquashfs-realtek $RPM
 install -D -p -m 755 unyaffs/bat-unyaffs $RPM_BUILD_ROOT%{_bindir}/bat-unyaffs
 install -D -p -m 755 romfsck/bat-romfsck $RPM_BUILD_ROOT%{_bindir}/bat-romfsck
 install -D -p -m 755 code2html-0.9.1/bat-code2html $RPM_BUILD_ROOT%{_bindir}/bat-code2html
-install -D -p -m 755 bat-visualisation/bat-generate-chart.py $RPM_BUILD_ROOT%{_bindir}/bat-generate-chart.py
 install -D -p -m 755 bat-minix/bat-minix $RPM_BUILD_ROOT%{_bindir}/bat-minix
 %files
 %{_bindir}/bat-unsquashfs42
@@ -52,4 +51,3 @@ install -D -p -m 755 bat-minix/bat-minix $RPM_BUILD_ROOT%{_bindir}/bat-minix
 %{_bindir}/bat-romfsck
 %{_bindir}/bat-code2html
 %{_bindir}/bat-minix
-%{_bindir}/bat-generate-chart.py
