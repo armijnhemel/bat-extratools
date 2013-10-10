@@ -1,3 +1,10 @@
+bat-extratools (15.0) unstable; urgency=low
+
+  * remove bat-generate-chart.py
+  * apply security fixes for squashfs 4.2
+
+ -- Armijn Hemel <armijn@binaryanalysis.org>  Thu, 10 Oct 2013 11:37:31 +0200
+
 bat-extratools (14.0) unstable; urgency=high
 
   * replace bat-unyaffs with reimplementation in Python to avoid segfaults
