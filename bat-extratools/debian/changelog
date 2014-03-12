@@ -1,3 +1,9 @@
+bat-extratools (16.0) unstable; urgency=low
+
+  * version bump to keep in sync with the rest
+
+ -- Armijn Hemel <armijn@binaryanalysis.org>  Wed, 12 January 2014 19:22:11 +0100
+
 bat-extratools (15.0) unstable; urgency=low
 
   * remove bat-generate-chart.py
