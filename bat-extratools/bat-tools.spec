@@ -1,6 +1,6 @@
 Summary: A collection of extra tools for the Binary Analysis Tool
 Name: bat-extratools
-Version: 15.0
+Version: 16.0
 Release: 1
 License: GPLv2, GPLv2+
 Source: %{name}-%{version}.tar.gz
