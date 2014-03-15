@@ -6,6 +6,7 @@ Included are:
 
 * cramfs - a version of cramfs that can unpack cramfs (the standard version of Fedora can't) and which does not require root privileges
 * bat-romfsck - a script to unpack romfs file systems.
+* simg2img lifted from https://android.googlesource.com/platform/system/core/+/master (tree a48a0f7829fdca6aec69e8829e9088f48eab2879 )
 * squashfs-atheros - a version of squashfs with LZMA compression that is used on devices that are based on certain Atheros chipsets. This is derived from squashfs+lzma from slax.org
 * squashfs-atheros2 - a version of squashfs with LZMA compression that is used on devices that are based on certain Atheros chipsets. This version is much like OpenWrt's variant.
 * squashfs-broadcom - a version of squashfs with LZMA compression that is used on devices that are based on certain Broadcom chipsets
