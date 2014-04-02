@@ -1,3 +1,9 @@
+bat-extratools (17.0) unstable; urgency=low
+
+  * add simg2img for unpacking Android file systems
+
+ -- Armijn Hemel <armijn@binaryanalysis.org>  Wed, 2 Apr 2014 20:08:11 +0200
+
 bat-extratools (16.0) unstable; urgency=low
 
   * version bump to keep in sync with the rest
