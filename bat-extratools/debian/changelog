@@ -1,3 +1,9 @@
+bat-extratools (19.0) unstable; urgency=low
+
+  * version bump to keep in sync with the rest
+
+ -- Armijn Hemel <armijn@binaryanalysis.org>  Fri, 5 Jul 2014 21:58:21 +0200
+
 bat-extratools (18.0) unstable; urgency=low
 
   * version bump to keep in sync with the rest
