@@ -15,3 +15,10 @@ Included are:
 * squashfs-openwrt - a different version of squashfs with LZMA compression that is used on devices that run OpenWrt derived distributions. Can sometimes also be used for different distributions.
 * squashfs4.2 - latest official version of squashfs with XZ, LZMA and LZO compression enabled by default.
 * unyaffs - from http://code.google.com/p/unyaffs/
+
+Furthermore included:
+
+* ubi_reader - from https://github.com/jrspruitt/ubi_reader, commit 372e5da53a9b52295af98b4e9852d12f393df6ae
+The only changes are packaging and a few scripts that have been renamed (prefixed with "ubi_")
+
+This program is installed separately as a RPM, or DEB (TODO)
