@@ -14,7 +14,7 @@ Included are:
 * squashfs-realtek - a version of squashfs with LZMA compression that is used on devices that are based on certain Realtek chipsets. This one does not have LZMA headers, but immediately has the compressed data. The LZMA offsets are hardcoded in the kernel source code. Many thanks to Felix Fietkau from OpenWrt for extracting the right information from the Linux kernel headers and making it work!
 * squashfs-openwrt - a different version of squashfs with LZMA compression that is used on devices that run OpenWrt derived distributions. Can sometimes also be used for different distributions.
 * squashfs4.2 - latest official version of squashfs with XZ, LZMA and LZO compression enabled by default.
-* unyaffs - from http://code.google.com/p/unyaffs/
+* unyaffs - original version was from http://code.google.com/p/unyaffs/ . Reimplementation was done in Python and further developed by Tjaldur Sfotware Governance Solutions
 
 Furthermore included:
 
