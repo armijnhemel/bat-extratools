@@ -69,7 +69,7 @@ def main(argv):
 			print >>sys.stderr, "not a valid YAFFS2 image"
 		sys.exit(1)
 
-	chunksandspares = fileredchunksandspares
+	chunksandspares = filteredchunksandspares
 
 	image_file = open(yaffs2file)
 
