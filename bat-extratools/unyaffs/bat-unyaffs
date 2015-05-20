@@ -54,20 +54,22 @@ def main(argv):
 
 	yaffs2filesize = os.stat(yaffs2file).st_size
 
-	#chunksandspares = [(2048,64), (1024,64)]
-	chunksandspares = [(2048,64)]
+	chunksandspares = [(2048,64),(4192,128),(8196,256)]
 	possibleyaffs = False
 
+	filteredchunksandspares = []
 	for cs in chunksandspares:
 		(CHUNK_SIZE, SPARE_SIZE) = cs
 		if yaffs2filesize%(CHUNK_SIZE + SPARE_SIZE) == 0:
 			possibleyaffs = True
-			break
+			filteredchunksandspares.append(cs)
 
 	if not possibleyaffs:
 		if options.verbose:
 			print >>sys.stderr, "not a valid YAFFS2 image"
 		sys.exit(1)
+
+	chunksandspares = fileredchunksandspares
 
 	image_file = open(yaffs2file)
 
@@ -97,6 +99,7 @@ def main(argv):
 			chunkId = struct.unpack('<L', sparedata[8:12])[0]
 			byteCount = struct.unpack('<L', sparedata[12:16])[0]
 
+			## check if byteCount > YAFFS_MAX_CHUNK_ID
 			if byteCount > 0xffff:
 				yaffsunpackfail = True
 				break
