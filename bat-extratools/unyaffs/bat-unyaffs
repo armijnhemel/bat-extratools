@@ -4,7 +4,7 @@
 Yaffs2 unpacker reimplemention, heavily borrowing from unyaffs created
 by Kai Wei
 
-(C) 2013 Armijn Hemel, Tjaldur Software Governance Solutions
+(C) 2013-2015 Armijn Hemel, Tjaldur Software Governance Solutions
 
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 2 as
@@ -54,7 +54,7 @@ def main(argv):
 
 	yaffs2filesize = os.stat(yaffs2file).st_size
 
-	chunksandspares = [(2048,64),(4096,128),(8192,256)]
+	chunksandspares = [(512,16),(1024,32),(2048,64),(4096,128),(8192,256)]
 	possibleyaffs = False
 
 	filteredchunksandspares = []
