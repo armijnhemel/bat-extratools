@@ -54,7 +54,7 @@ def main(argv):
 
 	yaffs2filesize = os.stat(yaffs2file).st_size
 
-	chunksandspares = [(2048,64),(4192,128),(8196,256)]
+	chunksandspares = [(2048,64),(4196,128),(8192,256)]
 	possibleyaffs = False
 
 	filteredchunksandspares = []
