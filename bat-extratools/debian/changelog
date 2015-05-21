@@ -1,3 +1,9 @@
+bat-extratools (21.0) unstable; urgency=low
+
+  * improve bat-unyaffs, add more combinations of chunks and spares
+
+ -- Armijn Hemel <armijn@binaryanalysis.org>  Thu, 21 May 2015 11:02:41 +0200
+
 bat-extratools (20.0) unstable; urgency=low
 
   * version bump to keep in sync with the rest
