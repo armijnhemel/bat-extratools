@@ -115,7 +115,7 @@ def main(argv):
 				chunktype = struct.unpack('<L', chunkdata[offset:offset+4])[0]
 				offset = offset + 4
 
-				## unused checksum, can be ignored
+				## parent object id. Will be YAFFS_OBJECTID_ROOT for root
 				parentObjectId = struct.unpack('<L', chunkdata[offset:offset+4])[0]
 				offset = offset + 4
 
