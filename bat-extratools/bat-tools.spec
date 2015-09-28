@@ -1,6 +1,6 @@
 Summary: A collection of extra tools for the Binary Analysis Tool
 Name: bat-extratools
-Version: 22.0
+Version: 23.0
 Release: 1
 License: GPLv2, GPLv2+, ASL 2.0
 Source: %{name}-%{version}.tar.gz
