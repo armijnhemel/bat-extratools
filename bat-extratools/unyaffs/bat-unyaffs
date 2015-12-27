@@ -80,6 +80,8 @@ def main(argv):
 		if yaffsunpacked:
 			break
 		(CHUNK_SIZE, SPARE_SIZE) = cs
+		if yaffs2filesize < (CHUNK_SIZE + SPARE_SIZE):
+			continue
 		bytesread = 0
 		yaffsunpackfail = False
 
