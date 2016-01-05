@@ -101,7 +101,7 @@ def main(argv):
 			chunkId = struct.unpack('<L', sparedata[8:12])[0]
 			byteCount = struct.unpack('<L', sparedata[12:16])[0]
 
-			## check if byteCount > YAFFS_MAX_CHUNK_ID
+			## dunno why this check is here, copied from unyaffs.c
 			if byteCount > 0xffff:
 				yaffsunpackfail = True
 				break
@@ -114,21 +114,26 @@ def main(argv):
 				oid = objectId
 				## new file, so process the chunk data
 				## first read in the object header
+
+				## This is defined in yaffs_guts.h in the YAFFS2 sources in
+				## yaffs_obj_hdr
+				## First the type of file: file, directory, link, etc.
 				chunktype = struct.unpack('<L', chunkdata[offset:offset+4])[0]
 				offset = offset + 4
 
-				## parent object id. Will be YAFFS_OBJECTID_ROOT for root
+				## Then the parent object id. If / is the parent object id, then this
+				## Will be YAFFS_OBJECTID_ROOT
 				parentObjectId = struct.unpack('<L', chunkdata[offset:offset+4])[0]
 				offset = offset + 4
 
 				## store the parent id for this object, so it can be retrieved later
 				objectparent[objectId] = parentObjectId
 
-				## unused checksum, can be ignored
+				## Next read the checksum. This is unused, so it can be ignored
 				checksum = struct.unpack('<H', chunkdata[offset:offset+2])[0]
 				offset = offset + 2
 
-				## extract the name, up to the first '\x00' character
+				## Then extract the name, up to the first '\x00' character
 				## and store it
 				yaffsname = chunkdata[offset:offset+YAFFS_MAX_NAME_LENGTH+1+2]
 				eoname = yaffsname.find('\x00')
@@ -147,6 +152,7 @@ def main(argv):
 					if options.verbose:
 						print >>sys.stderr, "unpacking", yaffsname
 
+				## Then read some more data related to modes and UID/GID
 				yst_mode = struct.unpack('<L', chunkdata[offset:offset+4])[0]
 				offset = offset + 4
 
@@ -165,13 +171,14 @@ def main(argv):
 				yst_ctime = struct.unpack('<L', chunkdata[offset:offset+4])[0]
 				offset = offset + 4
 
+				## Read the file size. This is for files only.
 				fileSize = struct.unpack('<L', chunkdata[offset:offset+4])[0]
 				offset = offset + 4
 
 				equivalentObjectId = struct.unpack('<L', chunkdata[offset:offset+4])[0]
 				offset = offset + 4
 
-				## extract the alias, up to the first '\x00' character
+				## Then extract the alias, up to the first '\x00' character
 				## and store it
 				aliasname = chunkdata[offset:offset+YAFFS_MAX_ALIAS_LENGTH+1]
 				eoname = aliasname.find('\x00')
