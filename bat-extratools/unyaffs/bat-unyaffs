@@ -119,17 +119,18 @@ def main(argv):
 		bytesToRead = 0
 		prev_sequenceNumber = -1
 		firstentry = True
+		haveroot = False
 
 		## read in the blocks of data
 		while not bytesread >= yaffs2filesize and not yaffsunpackfail:
 			chunkdata = image_file.read(CHUNK_SIZE)
 			sparedata = image_file.read(SPARE_SIZE)
+			bytesread = bytesread + len(chunkdata) + len(sparedata)
 
 			## read in the spare data first and extract some metadata
 			sequenceNumber = struct.unpack('<L', sparedata[0:4])[0]
 			if sequenceNumber == 0xffffffff:
 				## move on to the next chunk
-				bytesread = bytesread + len(chunkdata) + len(sparedata)
 				continue
 
 			if sequenceNumber < prev_sequenceNumber:
@@ -157,7 +158,6 @@ def main(argv):
 				if not chunktype in chunktypes:
 					## continue to the next chunk/spare combination, as this
 					## is not a valid file.
-					bytesread = bytesread + len(chunkdata) + len(sparedata)
 					break
 
 				offset = offset + 4
@@ -171,10 +171,13 @@ def main(argv):
 					yaffsinband = True
 					extrafilelength = byteCount
 					byteCount = 0
+					objectId = objectId & ~EXTRA_OBJECT_TYPE_MASK
 				else:
 					yaffsinband = False
 
-				objectId = objectId & ~EXTRA_OBJECT_TYPE_MASK
+				## chunk id of a new file is always 0
+				if chunkId != 0:
+					break
 
 				offset = offset + 4
 
@@ -191,8 +194,7 @@ def main(argv):
 				yaffsname = chunkdata[offset:offset+YAFFS_MAX_NAME_LENGTH+1+2]
 				eoname = yaffsname.find('\x00')
 				yaffsname=yaffsname[:eoname]
-				if len(yaffsname) == 0 and not firstentry:
-					bytesread = bytesread + len(chunkdata) + len(sparedata)
+				if len(yaffsname) == 0 and haveroot:
 					break
 
 				objectidtoname[objectId] = yaffsname
@@ -245,17 +247,20 @@ def main(argv):
 					aliasname = None
 				offset = offset + YAFFS_MAX_ALIAS_LENGTH + 1
 
-				if chunktype == YAFFS_OBJECT_TYPE_FILE:
+				## Process the various chunk types. Files and links can only be created
+				## after the root entry has been seen.
+				if chunktype == YAFFS_OBJECT_TYPE_FILE and haveroot:
 					outname = os.path.join(unpackdir, yaffsname)
 					outfile = open(outname, 'wb')
 					bytesToRead = fileSize
-				elif chunktype == YAFFS_OBJECT_TYPE_SYMLINK:
+				elif chunktype == YAFFS_OBJECT_TYPE_SYMLINK and haveroot:
 					if aliasname != None:
 						symlink = os.path.join(unpackdir, yaffsname)
 						try:
 							os.symlink(aliasname, symlink)
 						except Exception, e:
-							print e
+							pass
+							#print e
 				elif chunktype == YAFFS_OBJECT_TYPE_DIRECTORY:
 					## create the directory and move on
 					createdir = os.path.join(unpackdir, yaffsname)
@@ -264,11 +269,12 @@ def main(argv):
 							os.makedirs(createdir)
 							yaffsunpacked = True
 						except Exception, e:
-							print e, "NAME", len(yaffsname), sequenceNumber
+							#print e, "NAME", len(yaffsname), sequenceNumber
 							pass
 					else:
+						haveroot = True
 						firstentry = False
-				elif chunktype == YAFFS_OBJECT_TYPE_HARDLINK:
+				elif chunktype == YAFFS_OBJECT_TYPE_HARDLINK and haveroot:
 					## create a hard link.
 					## TODO: more sanity checks
 					linkname = os.path.join(unpackdir, yaffsname)
@@ -285,9 +291,6 @@ def main(argv):
 				if outfile != None:
 					outfile.write(chunkdata[:byteCount])
 					bytesToRead -= byteCount
-
-			## move on to the next chunk
-			bytesread = bytesread + len(chunkdata) + len(sparedata)
 
 		if outfile != None:
 			outfile.close()
