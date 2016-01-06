@@ -294,6 +294,10 @@ def main(argv):
 	image_file.close()
 
 	if not yaffsunpacked:
+		## some data could have been unpacked
+		rmfiles = os.listdir(unpackdir)
+		for r in rmfiles:
+			os.unlink(os.path.join(unpackdir, r))
 		if options.verbose:
 			print >>sys.stderr, "YAFFS2 image could not be unpacked"
 		sys.exit(1)
