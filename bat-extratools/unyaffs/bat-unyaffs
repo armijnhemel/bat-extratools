@@ -299,7 +299,7 @@ def main(argv):
 		sys.exit(1)
 
 	if options.json == True:
-		print json.dumps({'bytesread': bytesread, offset: fileoffset})
+		print json.dumps({'bytesread': bytesread, 'offset': fileoffset})
 
 if __name__ == "__main__":
 	main(sys.argv)
