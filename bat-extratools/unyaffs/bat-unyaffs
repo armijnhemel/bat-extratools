@@ -125,12 +125,12 @@ def main(argv):
 		while not bytesread >= yaffs2filesize and not yaffsunpackfail:
 			chunkdata = image_file.read(CHUNK_SIZE)
 			sparedata = image_file.read(SPARE_SIZE)
-			bytesread = bytesread + len(chunkdata) + len(sparedata)
 
 			## read in the spare data first and extract some metadata
 			sequenceNumber = struct.unpack('<L', sparedata[0:4])[0]
 			if sequenceNumber == 0xffffffff:
 				## move on to the next chunk
+				bytesread = bytesread + len(chunkdata) + len(sparedata)
 				continue
 
 			if sequenceNumber < prev_sequenceNumber:
@@ -291,6 +291,7 @@ def main(argv):
 				if outfile != None:
 					outfile.write(chunkdata[:byteCount])
 					bytesToRead -= byteCount
+			bytesread = bytesread + len(chunkdata) + len(sparedata)
 
 		if outfile != None:
 			outfile.close()
