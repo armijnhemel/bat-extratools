@@ -12,7 +12,7 @@ by Kai Wei, later extended for other spare/chunk sizes and inband tags.
 
 '''
 
-import sys, os, os.path, struct
+import sys, os, os.path, struct, json
 from optparse import OptionParser
 
 
@@ -53,7 +53,8 @@ def main(argv):
 	parser = OptionParser()
 	parser.add_option("-b", "--binary", action="store", dest="yaffs2file", help="path to binary file", metavar="FILE")
 	parser.add_option("-d", "--directory", action="store", dest="unpackdir", help="path to unpacking directory", metavar="DIR")
-	parser.add_option("-j", "--json", action="store_true", dest="storejson", help="output results in JSON format")
+	parser.add_option("-j", "--json", action="store_true", dest="json", help="output results in JSON format")
+	parser.add_option("-n", "--offset", action="store", dest="fileoffset", help="file offset to start unpacking")
 	parser.add_option("-v", "--verbose", action="store_true", dest="verbose", help="verbose output")
 	(options, args) = parser.parse_args()
 
@@ -73,6 +74,14 @@ def main(argv):
 	else:
 		unpackdir = options.unpackdir
 
+	if options.fileoffset != None:
+		try:
+			fileoffset = int(options.fileoffset)
+		except:
+			fileoffset = 0
+	else:
+		fileoffset = 0
+
 	yaffs2filesize = os.stat(yaffs2file).st_size
 
 	## list of observed chunk/spare values. Some of these like (4080, 16) are for
@@ -85,7 +94,6 @@ def main(argv):
 		if yaffs2filesize%(CHUNK_SIZE + SPARE_SIZE) == 0:
 			possibleyaffs = True
 
-	fileoffset = 0
 	image_file = open(yaffs2file, 'rb')
 	bytesread = 0
 
@@ -289,6 +297,9 @@ def main(argv):
 		if options.verbose:
 			print >>sys.stderr, "YAFFS2 image could not be unpacked"
 		sys.exit(1)
+
+	if options.json == True:
+		print json.dumps({'bytesread': bytesread, offset: fileoffset})
 
 if __name__ == "__main__":
 	main(sys.argv)
