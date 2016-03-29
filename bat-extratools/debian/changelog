@@ -1,8 +1,14 @@
+bat-extratools (25.0) unstable; urgency=low
+
+  * version bump to keep in sync with the rest
+
+ -- Armijn Hemel <armijn@binaryanalysis.org>  Tue, 29 Mar 2016 12:09:11 +0200
+
 bat-extratools (24.0) unstable; urgency=medium
 
   * updated bat-unyaffs to better deal with different YAFFS2 file systems
 
- -- Armijn Hemel <armijn@binaryanalysis.org>  Wed, 27 Jan 2015 17:18:41 +0100
+ -- Armijn Hemel <armijn@binaryanalysis.org>  Wed, 27 Jan 2016 17:18:41 +0100
 
 bat-extratools (23.0) unstable; urgency=low
 
