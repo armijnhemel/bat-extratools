@@ -124,7 +124,11 @@ def main(argv):
 		## read in the blocks of data
 		while not bytesread >= yaffs2filesize and not yaffsunpackfail:
 			chunkdata = image_file.read(CHUNK_SIZE)
+			if not len(chunkdata) == CHUNK_SIZE:
+				break
 			sparedata = image_file.read(SPARE_SIZE)
+			if not len(sparedata) == SPARE_SIZE:
+				break
 
 			## read in the spare data first and extract some metadata
 			sequenceNumber = struct.unpack('<L', sparedata[0:4])[0]
