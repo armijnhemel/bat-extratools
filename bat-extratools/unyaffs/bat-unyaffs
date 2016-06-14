@@ -87,12 +87,6 @@ def main(argv):
 	## list of observed chunk/spare values. Some of these like (4080, 16) are for
 	## file systems that have inband tags instead of out of band spares.
 	chunksandspares = [(512,16),(1024,32),(2048,64),(4096,128),(8192,256),(4080,16)]
-	possibleyaffs = False
-
-	for cs in chunksandspares:
-		(CHUNK_SIZE, SPARE_SIZE) = cs
-		if yaffs2filesize%(CHUNK_SIZE + SPARE_SIZE) == 0:
-			possibleyaffs = True
 
 	image_file = open(yaffs2file, 'rb')
 	bytesread = 0
