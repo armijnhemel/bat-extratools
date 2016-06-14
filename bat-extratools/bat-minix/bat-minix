@@ -2,7 +2,7 @@
 #-*- coding: utf-8 -*-
 
 ## Binary Analysis Tool
-## Copyright 2012 Armijn Hemel for Tjaldur Software Governance Solutions
+## Copyright 2012-2016 Armijn Hemel for Tjaldur Software Governance Solutions
 ## Licensed under the GNU General Public License 2.0, see COPYING for details
 
 '''
@@ -19,11 +19,14 @@ Information from:
 import array, sys, os, os.path
 from optparse import OptionParser
 
-def readMinix(path, outpath):
+def readMinix(filepath, outpath):
+	filesize = os.stat(filepath).st_size
+	if filesize < 2048:
+		return
 	## first suck in the file system. This can probably be done more
 	## efficiently, but most Minix file systems we see are very small
 	## TODO: do this more efficient.
-	minixfile = open(path)
+	minixfile = open(filepath, 'rb')
 	minixdata = minixfile.read()
 	minixfile.close()
 
