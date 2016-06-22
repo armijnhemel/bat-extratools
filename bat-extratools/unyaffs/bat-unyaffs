@@ -12,7 +12,7 @@ by Kai Wei, later extended for other spare/chunk sizes and inband tags.
 
 '''
 
-import sys, os, os.path, struct, json
+import sys, os, os.path, struct, json, shutil
 from optparse import OptionParser
 
 
@@ -100,7 +100,6 @@ def main(argv):
 		(CHUNK_SIZE, SPARE_SIZE) = cs
 		if yaffs2filesize < (CHUNK_SIZE + SPARE_SIZE):
 			continue
-
 		## reset a bunch of values
 		yaffsunpackfail = False
 		bytesread = 0
@@ -276,7 +275,11 @@ def main(argv):
 					## create a hard link.
 					## TODO: more sanity checks
 					linkname = os.path.join(unpackdir, yaffsname)
-					os.link(os.path.join(unpackdir, objectidtofullname[equivalentObjectId]), linkname)
+					if not equivalentObjectId in objectidtofullname:
+						yaffsunpackfail = True
+						yaffsunpacked = False
+					else:
+						os.link(os.path.join(unpackdir, objectidtofullname[equivalentObjectId]), linkname)
 				elif chunktype == YAFFS_OBJECT_TYPE_SPECIAL:
 					## root privileges are needed for this and BAT is usually run as non-root
 					pass
@@ -299,7 +302,11 @@ def main(argv):
 		## some data could have been unpacked
 		rmfiles = os.listdir(unpackdir)
 		for r in rmfiles:
-			os.unlink(os.path.join(unpackdir, r))
+			rmfile = os.path.join(unpackdir, r)
+			if not os.path.isdir(rmfile):
+				os.unlink(rmfile)
+			else:
+				shutil.rmtree(rmfile)
 		if options.verbose:
 			print >>sys.stderr, "YAFFS2 image could not be unpacked"
 		sys.exit(1)
