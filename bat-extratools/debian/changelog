@@ -1,3 +1,11 @@
+bat-extratools (26.0) unstable; urgency=medium
+
+  * updated bat-unyaffs to better deal with false positives from Windows DLL
+    files. Fix a few other crashes.
+  * updated bat-minix to resolve crashes
+
+ -- Armijn Hemel <armijn@binaryanalysis.org>  Thu, 23 Jun 2016 20:27:11 +0200
+
 bat-extratools (25.0) unstable; urgency=low
 
   * version bump to keep in sync with the rest
