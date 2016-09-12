@@ -1,3 +1,9 @@
+bat-extratools (27.0) unstable; urgency=medium
+
+  * updated bat-unyaffs to unpack more yaffs2 variants
+
+ -- Armijn Hemel <armijn@binaryanalysis.org>  Mon, 12 Sep 2016 12:15:41 +0200
+
 bat-extratools (26.0) unstable; urgency=medium
 
   * updated bat-unyaffs to better deal with false positives from Windows DLL
