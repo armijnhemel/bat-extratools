@@ -1,5 +1,5 @@
 cramfs/disk-utils/bat-fsck.cramfs		usr/bin
-squashfs4.2/squashfs-tools/bat-unsquashfs42	usr/bin
+squashfs4.3/squashfs-tools/bat-unsquashfs42	usr/bin
 squashfs-atheros/squashfs3.3/squashfs-tools/bat-unsquashfs-atheros	usr/bin
 squashfs-atheros2/bat-unsquashfs-atheros2	usr/bin
 squashfs-atheros4.0/squashfs-tools/bat-unsquashfs-atheros40	usr/bin
