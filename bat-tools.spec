@@ -19,7 +19,7 @@ make
 %install
 rm -rf $RPM_BUILD_ROOT
 install -D -p -m 755 cramfs/disk-utils/bat-fsck.cramfs $RPM_BUILD_ROOT%{_bindir}/bat-fsck.cramfs
-install -D -p -m 755 squashfs4.2/squashfs-tools/bat-unsquashfs42 $RPM_BUILD_ROOT%{_bindir}/bat-unsquashfs42
+install -D -p -m 755 squashfs4.3/squashfs-tools/bat-unsquashfs42 $RPM_BUILD_ROOT%{_bindir}/bat-unsquashfs42
 install -D -p -m 755 squashfs-atheros/squashfs3.3/squashfs-tools/bat-unsquashfs-atheros $RPM_BUILD_ROOT%{_bindir}/bat-unsquashfs-atheros
 install -D -p -m 755 squashfs-atheros2/bat-unsquashfs-atheros2 $RPM_BUILD_ROOT%{_bindir}/bat-unsquashfs-atheros2
 install -D -p -m 755 squashfs-atheros4.0/squashfs-tools/bat-unsquashfs-atheros40 $RPM_BUILD_ROOT%{_bindir}/bat-unsquashfs-atheros40

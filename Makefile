@@ -31,7 +31,7 @@ squashfsddwrt:
 	cd squashfs-ddwrt; make
 
 squashfs42:
-	cd squashfs4.2/squashfs-tools; make
+	cd squashfs4.3/squashfs-tools; make
 
 cramfsunpack:
 	cd cramfs; ./configure --without-ncurses; make
